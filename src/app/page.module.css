@@ -8,7 +8,7 @@
 
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .page {
     --gray-rgb: 255, 255, 255;
     --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
@@ -17,7 +17,7 @@
     --button-primary-hover: #ccc;
     --button-secondary-hover: #1a1a1a;
   }
-}
+} */
 
 .main {
   display: flex;
@@ -28,8 +28,8 @@
 
 
 /* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {}
-
+/* @media (hover: hover) and (pointer: fine) {} */
+/* 
 @media (max-width: 600px) {
   .page {
     padding: 32px;
@@ -49,6 +49,6 @@
     align-items: center;
     justify-content: center;
   }
-}
+} */
 
-@media (prefers-color-scheme: dark) {}
+/* @media (prefers-color-scheme: dark) {} */

@@ -1,12 +1,15 @@
-import Image from "next/image";
-import React from "react";
+import { Box } from "@mui/material";
 
 const Banner: React.FC = () => {
     return (
-        <div style={{}}>
-            <img style={{ height: "15vh", width: "100%", objectFit: "cover" }} alt={"Home banner Rayole Apps"} src={"https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630"} />
-        </div>
-    )
-}
+        <Box sx={{ width: "100%", height: "15vh", overflow: "hidden" }}>
+            <img
+                src="https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630"
+                alt="Banner"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+        </Box>
+    );
+};
 
 export default Banner;

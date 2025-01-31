@@ -1,4 +1,20 @@
 .main_content {
     margin: 0;
     padding: 0;
+    background: var(--page-bg);
+    height: 100vh;
 }
+
+.headers {
+    position: sticky;
+}
+
+/* .offer_list {
+    overflow-y: scroll;
+    scrollbar-width: 0;
+    height: 78vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+} */

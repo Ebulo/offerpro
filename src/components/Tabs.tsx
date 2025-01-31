@@ -1,8 +1,156 @@
-const Tabs: React.FC = () => {
-    return (
-        <div style={{ height: "80px", width: "100%", background: "var(--secondary-background)", boxShadow: "0 0 10px 20px #fff" }}>
-        </div>
-    )
-}
+// "use client";
+// import { useState } from "react";
+// import { Box, Tabs, Tab, Typography } from "@mui/material";
+// import DiscountIcon from "@mui/icons-material/LocalOffer"; // Offers Icon
+// import HistoryIcon from "@mui/icons-material/History"; // History Icon
 
-export default Tabs;
+// const TabsComponent: React.FC = () => {
+//     const [value, setValue] = useState(0);
+
+//     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+//         setValue(newValue);
+//     };
+
+//     return (
+//         <Box
+//             sx={{
+//                 width: "100%",
+//                 bgcolor: "var(--secondary-background)",
+//                 display: "flex",
+//             }}
+//         >
+//             <Tabs
+//                 value={value}
+//                 onChange={handleChange}
+//                 variant="fullWidth"
+//                 sx={{
+//                     width: "100%",
+//                     "& .MuiTabs-indicator": { backgroundColor: "var(--primary-color)" },
+//                 }}
+//             >
+//                 <Tab
+//                     label={
+//                         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+//                             <DiscountIcon sx={{ fontSize: 30, color: value === 0 ? "var(--primary-color)" : "gray" }} />
+//                             <Typography sx={{ color: value === 0 ? "white" : "gray", fontSize: 18 }}>Offers</Typography>
+//                         </Box>
+//                     }
+//                     sx={{
+//                         flex: 1,
+//                         height: "7vh",
+//                         textTransform: "none",
+//                         bgcolor: value === 0 ? "var(--secondary-background)" : "transparent",
+//                     }}
+//                 />
+
+//                 <Tab
+//                     label={
+//                         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+//                             <HistoryIcon sx={{ fontSize: 30, color: value === 1 ? "var(--primary-color)" : "gray" }} />
+//                             <Typography sx={{ color: value === 1 ? "white" : "gray", fontSize: 18 }}>History</Typography>
+//                         </Box>
+//                     }
+//                     sx={{
+//                         flex: 1,
+//                         height: "7vh",
+//                         textTransform: "none",
+//                         bgcolor: value === 1 ? "var(--secondary-background)" : "transparent",
+//                     }}
+//                 />
+//             </Tabs>
+//         </Box>
+//     );
+// };
+
+// export default TabsComponent;
+
+"use client";
+import { useState } from "react";
+import { Box, Tabs, Tab, Typography, Slide } from "@mui/material";
+import DiscountIcon from "@mui/icons-material/LocalOffer"; // Offers Icon
+import HistoryIcon from "@mui/icons-material/History"; // History Icon
+import OfferFilter from "./OfferFilter";
+import OfferList from "./OfferList";
+
+import styles from "./components.module.css";
+
+const TabsComponent: React.FC = () => {
+    const [value, setValue] = useState(0);
+
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
+
+    return (
+        <Box sx={{ width: "100%", bgcolor: "var(--background-color)", display: "flex", flexDirection: "column" }}>
+            {/* Tabs Header */}
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                variant="fullWidth"
+                sx={{
+                    width: "100%",
+                    "& .MuiTabs-indicator": { backgroundColor: "var(--primary-color)" },
+                }}
+            >
+                {/* Offers Tab */}
+                <Tab
+                    label={
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                            <DiscountIcon sx={{ fontSize: 30, color: value === 0 ? "var(--primary-color)" : "gray" }} />
+                            <Typography sx={{ color: value === 0 ? "white" : "gray", fontSize: 18 }}>Offers</Typography>
+                        </Box>
+                    }
+                    sx={{
+                        flex: 1,
+                        height: "7vh",
+                        textTransform: "none",
+                        bgcolor: value === 0 ? "var(--secondary-background)" : "transparent",
+                    }}
+                />
+
+                {/* History Tab */}
+                <Tab
+                    label={
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                            <HistoryIcon sx={{ fontSize: 30, color: value === 1 ? "var(--primary-color)" : "gray" }} />
+                            <Typography sx={{ color: value === 1 ? "white" : "gray", fontSize: 18 }}>History</Typography>
+                        </Box>
+                    }
+                    sx={{
+                        flex: 1,
+                        height: "7vh",
+                        textTransform: "none",
+                        bgcolor: value === 1 ? "var(--secondary-background)" : "transparent",
+                    }}
+                />
+            </Tabs>
+
+            {/* Content Switching */}
+            <Box sx={{ width: "100%", height: "78vh", overflow: "hidden", position: "relative" }}>
+                {value === 0 ? (
+                    <Slide direction="left" in={value === 0} mountOnEnter unmountOnExit>
+                        <Box sx={{ width: "100%", height: "100%" }}>
+                            {/* <Typography variant="h5" sx={{ color: "white" }}>Offers Page</Typography> */}
+                            {/* Insert your Offers content here */}
+                            <div className={styles.offer_list}>
+                                <OfferFilter />
+                                <OfferList />
+                            </div>
+
+                        </Box>
+                    </Slide>
+                ) : (
+                    <Slide direction="right" in={value === 1} mountOnEnter unmountOnExit>
+                        <Box sx={{ width: "100%", height: "100%", p: 2 }}>
+                            {/* <Typography variant="h5" sx={{ color: "white" }}>History Page</Typography> */}
+                            {/* Insert your History content here */}
+                        </Box>
+                    </Slide>
+                )}
+            </Box>
+        </Box>
+    );
+};
+
+export default TabsComponent;
