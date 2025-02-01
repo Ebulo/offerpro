@@ -5,7 +5,7 @@
   --card-bg: #363636;
   --foreground: #171717;
   --secondary-foreground: #171717;
-  --primary-color: #FFA100;
+  --primary-color: #ffa100;
   --secondary-color: #ffc561e9;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 .main-body {
-  max-width: 600px;
+  max-width: 500px;
   width: 100%;
 }
 

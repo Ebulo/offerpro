@@ -1,8 +1,8 @@
 import Banner from "@/components/Banner";
 import Tabs from "@/components/Tabs";
 import styles from "./home.module.css";
-import OfferList from "@/components/OfferList";
-import OfferFilter from "@/components/OfferFilter";
+// import OfferList from "@/components/OfferList";
+// import OfferFilter from "@/components/OfferFilter";
 
 export default function Home() {
     return (
