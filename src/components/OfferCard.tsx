@@ -11,7 +11,7 @@ interface OfferDetails {
   offerId: string;
 }
 
-const OfferCard = ({ offerDetails }: { offerDetails: OfferDetails }) => {
+const OfferCard = ({ offerDetails, onClick }: { offerDetails: OfferDetails, onClick: (() => void) }) => {
   return (
     <Box
       sx={{
@@ -27,6 +27,7 @@ const OfferCard = ({ offerDetails }: { offerDetails: OfferDetails }) => {
         "&:hover": { opacity: 0.9 },
         margin: "10px 2px",
       }}
+      onClick={() => onClick()}
     >
       {/* First Row */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
