@@ -11,6 +11,7 @@ import HistoryFilter from "./HistoryFilters";
 
 const TabsComponent: React.FC = () => {
   const [value, setValue] = useState(0);
+  // const [historyFilter, setHistoryFilter] = useState("All");
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -110,11 +111,7 @@ const TabsComponent: React.FC = () => {
           </Slide>
         ) : (
           <Slide direction="right" in={value === 1} mountOnEnter unmountOnExit>
-            {/* <Box sx={{ width: "100%", height: "100%" }}> */}
-            {/* <Typography variant="h5" sx={{ color: "white" }}>History Page</Typography> */}
-            {/* Insert your History content here */}
             <div className={styles.offer_list}>
-              {/* <OfferFilter />/ */}
               <HistoryFilter
                 filtersList={[
                   "All",
@@ -123,7 +120,8 @@ const TabsComponent: React.FC = () => {
                   "Completed",
                   "Declined",
                 ]}
-                selectedValue="All"
+                // selectedValue={historyFilter}
+                // setHistoryFilter={setHistoryFilter}
               />
               <HistoryList />
             </div>
