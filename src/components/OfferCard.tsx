@@ -1,17 +1,15 @@
 import { Box, Button, Typography, Chip } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime"; // Clock icon
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"; // Right arrow icon
+import { Offer } from "@/types/Offer";
 
-interface OfferDetails {
-  offerType: string;
-  offerName: string;
-  offerCoins: string;
-  offerDuration: string;
-  offerImage: string;
-  offerId: string;
-}
-
-const OfferCard = ({ offerDetails, onClick }: { offerDetails: OfferDetails, onClick: (() => void) }) => {
+const OfferCard = ({
+  offerDetails,
+  onClick,
+}: {
+  offerDetails: Offer;
+  onClick: () => void;
+}) => {
   return (
     <Box
       sx={{
@@ -37,7 +35,9 @@ const OfferCard = ({ offerDetails, onClick }: { offerDetails: OfferDetails, onCl
           src={offerDetails.offerImage}
           alt="Offer"
           sx={{
-            width: "20%",
+            width: "70px",
+            height: "70px",
+            objectFit: "cover",
             borderRadius: "12px",
           }}
         />
@@ -45,13 +45,13 @@ const OfferCard = ({ offerDetails, onClick }: { offerDetails: OfferDetails, onCl
         {/* Offer Details */}
         <Box sx={{ width: "80%", display: "flex", flexDirection: "column" }}>
           <Typography sx={{ color: "gray", fontSize: "14px" }}>
-            {offerDetails.offerType}
+            {offerDetails.offerType.name}
           </Typography>
           <Typography
             sx={{ color: "white", fontSize: "18px", fontWeight: "bold" }}
           >
             {/* Offer Name */}
-            {offerDetails.offerName}
+            {offerDetails.name}
           </Typography>
           <Chip
             icon={<AccessTimeIcon sx={{ fontSize: "14px", color: "white" }} />}
@@ -102,7 +102,7 @@ const OfferCard = ({ offerDetails, onClick }: { offerDetails: OfferDetails, onCl
             fontWeight: "bold",
           }}
         >
-          {offerDetails.offerCoins} Coins
+          {offerDetails.rewardCoins} Coins
         </Button>
       </Box>
     </Box>
@@ -111,11 +111,7 @@ const OfferCard = ({ offerDetails, onClick }: { offerDetails: OfferDetails, onCl
 
 export default OfferCard;
 
-export const HistoryCard = ({
-  offerDetails,
-}: {
-  offerDetails: OfferDetails;
-}) => {
+export const HistoryCard = ({ offerDetails }: { offerDetails: Offer }) => {
   return (
     <Box
       sx={{
@@ -138,9 +134,11 @@ export const HistoryCard = ({
         <Box
           component="img"
           src={offerDetails.offerImage}
-          alt="Offer"
+          alt="Image of the Offer History"
           sx={{
-            width: "20%",
+            width: "70px",
+            height: "70px",
+            objectFit: "cover",
             borderRadius: "12px",
           }}
         />
@@ -148,13 +146,13 @@ export const HistoryCard = ({
         {/* Offer Details */}
         <Box sx={{ width: "80%", display: "flex", flexDirection: "column" }}>
           <Typography sx={{ color: "gray", fontSize: "14px" }}>
-            {offerDetails.offerType}
+            {offerDetails.offerType.name}
           </Typography>
           <Typography
             sx={{ color: "white", fontSize: "18px", fontWeight: "bold" }}
           >
             {/* Offer Name */}
-            {offerDetails.offerName}
+            {offerDetails.name}
           </Typography>
           <Chip
             icon={<AccessTimeIcon sx={{ fontSize: "14px", color: "white" }} />}
@@ -170,41 +168,6 @@ export const HistoryCard = ({
           />
         </Box>
       </Box>
-
-      {/* <Box sx={{ display: "flex", gap: 2 }}>
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            bgcolor: "gray",
-            color: "white",
-            borderRadius: "12px",
-            textTransform: "none",
-            fontSize: "16px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            px: 2,
-          }}
-        >
-          View Details <ChevronRightIcon />
-        </Button>
-
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            bgcolor: "var(--primary-color)",
-            color: "white",
-            borderRadius: "12px",
-            textTransform: "none",
-            fontSize: "16px",
-            fontWeight: "bold",
-          }}
-        >
-          {offerDetails.offerCoins} Coins
-        </Button>
-      </Box> */}
     </Box>
   );
 };
