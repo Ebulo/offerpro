@@ -2,6 +2,7 @@ import { Offer } from "@/types/Offer";
 import styles from "./detail.module.css";
 import DetailBanner from "@/components/detail/DetailBanner";
 import DetailData from "@/components/detail/DetailData";
+import { Button } from "@mui/material";
 
 const offerDummy = {
   id: 101,
@@ -18,6 +19,35 @@ const offerDummy = {
 "2": "You will be redirected to the creator's social media page.",
 "3": "Follow the creator on social media.",
 "4": "Take the screenshot to verify that you have followed the creator.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
+"5": "Come back and click over upload button to upload the screenshot.",
 "5": "Come back and click over upload button to upload the screenshot.",
 "6": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account."
 }`,
@@ -41,8 +71,14 @@ const OfferDetail = ({ offer }: { offer: Offer }) => {
 
   return (
     <div className={styles.main}>
-      <DetailBanner />
-      <DetailData offer={offer} />
+      <div>
+        <DetailBanner />
+        <DetailData offer={offer} />
+      </div>
+      <div style={{ width: "100%", padding: "10px", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center", bottom: "0", background: "#4442", backdropFilter: "blur(1)" }}>
+        <Button style={{ width: "90%", borderRadius: "10px", background: "var(--primary-color)", color: "var(--text-color)" }}>Get 10000 Coins</Button>
+      </div>
+
     </div>
   );
 };
