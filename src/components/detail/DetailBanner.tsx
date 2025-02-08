@@ -2,8 +2,8 @@
 
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { ArrowBackIosNew, ArrowBackRounded } from "@mui/icons-material";
+// import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { ArrowBackRounded } from "@mui/icons-material";
 
 const DetailBanner: React.FC = () => {
     const router = useRouter();
