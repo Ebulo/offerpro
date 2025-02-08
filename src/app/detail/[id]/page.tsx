@@ -1,4 +1,3 @@
-import { Offer } from "@/types/Offer";
 import styles from "./detail.module.css";
 import DetailBanner from "@/components/detail/DetailBanner";
 import DetailData from "@/components/detail/DetailData";
@@ -65,8 +64,8 @@ const offerDummy = {
   status: "active",
 };
 
-const OfferDetail = ({ offer }: { offer: Offer }) => {
-  offer = offerDummy;
+const OfferDetail = () => {
+  const offer = offerDummy;
   console.log("Offer: ", offer);
 
   return (
