@@ -6,3 +6,8 @@
     max-width: 500px;
     position: relative;
 }
+
+.detail_top {
+    height: 90vh;
+    overflow-y: scroll;
+}

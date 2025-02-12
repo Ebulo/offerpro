@@ -38,7 +38,13 @@ const offerDummy = {
 "22": "Come back and click over upload button to upload the screenshot.",
 "23": "Come back and click over upload button to upload the screenshot.",
 "24": "Come back and click over upload button to upload the screenshot.",
-"25": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account."
+"25": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account.",
+"26": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account.",
+"27": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account.",
+"28": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account.",
+"29": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account.",
+"30": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account.",
+"31": "Click on Submit button. And wait for the offer to be approved. Once approved coins will be credited to your account."
 }`,
     imageUrl:
       "https://cdn.pixabay.com/photo/2024/02/16/14/33/ai-generated-8577690_1280.jpg",
@@ -60,11 +66,11 @@ const OfferDetail = () => {
 
   return (
     <div className={styles.main}>
-      <div>
+      <div className={styles.detail_top}>
         <DetailBanner />
         <DetailData offer={offer} />
       </div>
-      <div style={{ width: "100%", padding: "10px", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center", bottom: "0", background: "#4442", backdropFilter: "blur(1)" }}>
+      <div style={{ width: "100%", padding: "10px 10px 25px 10px", height: "10vh", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center", bottom: "0", background: "#4442", backdropFilter: "blur(1)" }}>
         <Button style={{ width: "90%", borderRadius: "10px", background: "var(--primary-color)", color: "var(--text-color)" }}>Get 10000 Coins</Button>
       </div>
     </div>
