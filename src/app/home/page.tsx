@@ -5,7 +5,7 @@ import Tabs from "@/components/Tabs";
 import styles from "./home.module.css";
 import { Offer } from "@/types/Offer";
 
-export default function Home({ offers }: { offers: Offer[] }) {
+const Home = ({ offers }: { offers: Offer[] }) => {
   return (
     <>
       <div className={styles.main_content}>
@@ -16,4 +16,6 @@ export default function Home({ offers }: { offers: Offer[] }) {
       </div>
     </>
   );
-}
+};
+
+export default Home;
