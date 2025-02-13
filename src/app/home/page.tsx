@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 // "use client";
 
 // import styles from "./home.module.css";
@@ -47,25 +47,102 @@
 //     </>
 //   );
 // }
+// "use client";
 
-import styles from "./home.module.css";
-import { useQueryParams } from "@/hooks/useQueryParams";
-import { Offer } from "@/types/Offer";
-import { useEffect, useState } from "react";
+// import { useSearchParams } from "next/navigation";
+// import { Suspense, useEffect, useState } from "react";
+// import { fetchTasks } from "@/services/api";
+// import { Offer } from "@/types/Offer";
+// import Banner from "@/components/Banner";
+// import Tabs from "@/components/Tabs";
+// import styles from "./home.module.css";
+
+// export default function Home() {
+//   const searchParams = useSearchParams();
+//   const [offers, setOffers] = useState<Offer[]>([]);
+
+//   useEffect(() => {
+//     const userEmail = searchParams.get("uemail") ?? "";
+//     const advertisingId = searchParams.get("ad_id") ?? "";
+//     const userId = searchParams.get("uid") ?? "";
+//     const appId = Number(searchParams.get("aid")) || 1;
+
+//     if (!userEmail || !advertisingId || !userId) return;
+
+//     const fetchOffers = async () => {
+//       try {
+//         const data = await fetchTasks({
+//           userEmail,
+//           advertisingId,
+//           userId,
+//           appId,
+//         });
+//         setOffers(data);
+//       } catch (error) {
+//         console.error("Failed to fetch offers:", error);
+//       }
+//     };
+
+//     fetchOffers();
+//   }, [searchParams]);
+
+//   return (
+//     <Suspense>
+//       <div className={styles.main_content}>
+//         <div className={styles.headers}>
+//           <Banner />
+//           <Tabs offers={offers} />
+//         </div>
+//       </div>
+//     </Suspense>
+//   );
+// }
+
+"use client";
+
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { fetchTasks } from "@/services/api";
+import { Offer } from "@/types/Offer";
 import Banner from "@/components/Banner";
 import Tabs from "@/components/Tabs";
+import styles from "./home.module.css";
 
 export default function Home() {
-  const queryParams = useQueryParams();
+  return (
+    <div className={styles.main_content}>
+      <div className={styles.headers}>
+        <Banner />
+        {/* ✅ Wrapping OffersComponent inside Suspense */}
+        <Suspense fallback={<p>Loading offers...</p>}>
+          <OffersComponent />
+        </Suspense>
+      </div>
+    </div>
+  );
+}
+
+// ✅ Move useSearchParams into a separate component
+function OffersComponent() {
+  const searchParams = useSearchParams();
   const [offers, setOffers] = useState<Offer[]>([]);
 
   useEffect(() => {
+    const userEmail = searchParams.get("uemail") ?? "";
+    const advertisingId = searchParams.get("ad_id") ?? "";
+    const userId = searchParams.get("uid") ?? "";
+    const appId = Number(searchParams.get("aid")) || 1;
+
+    if (!userEmail || !advertisingId || !userId) return;
+
     const fetchOffers = async () => {
-      if (!queryParams) return;
       try {
-        const data = await fetchTasks(queryParams);
-        console.log("Offers Data:", data);
+        const data = await fetchTasks({
+          userEmail,
+          advertisingId,
+          userId,
+          appId,
+        });
         setOffers(data);
       } catch (error) {
         console.error("Failed to fetch offers:", error);
@@ -73,14 +150,7 @@ export default function Home() {
     };
 
     fetchOffers();
-  }, [queryParams]); // Fetch when queryParams is available
+  }, [searchParams]);
 
-  return (
-    <div className={styles.main_content}>
-      <div className={styles.headers}>
-        <Banner />
-        <Tabs offers={offers} />
-      </div>
-    </div>
-  );
+  return <Tabs offers={offers} />;
 }

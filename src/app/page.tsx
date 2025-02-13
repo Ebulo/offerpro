@@ -6,10 +6,10 @@ import { Suspense } from "react";
 
 export default function Main() {
   return (
-    <div className={styles.page}>
-      <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<p>Loading...</p>}>
+      <div className={styles.page}>
         <Home />
-      </Suspense>
-    </div>
+      </div>
+    </Suspense>
   );
 }
