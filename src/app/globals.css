@@ -1,13 +1,17 @@
 :root {
   --background: #171717;
   --secondary-background: #282828;
-  --page-bg: #2a2a2a;
-  --card-bg: #363636;
+  --page-bg: #171723;
+  /* --card-bg: #363636; */
+  --card-bg: #1f2031;
   --foreground: #171717;
   --secondary-foreground: #171717;
-  --primary-color: #ffa100;
-  --secondary-color: #ffc561e9;
-  --text-color: "#222"
+  /* --primary-color: #ffa100; */
+  --primary-color: #5339ec;
+  --primary-color-30: #5339ec30;
+  /* --secondary-color: #ffc561e9; */
+  --secondary-color: #00c600;
+  --text-color: "#fff";
 }
 
 * {

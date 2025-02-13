@@ -8,7 +8,23 @@
 }
 
 .detail_top {
-  height: 90vh;
+  height: 83vh;
   overflow-y: scroll;
   scrollbar-width: none;
+}
+
+.bottom_container {
+  margin: 0;
+  padding: 0 0 20px 0;
+  background: #0001;
+  backdrop-filter: blur(2px);
+  height: 100vh;
+  max-width: 500px;
+  position: relative;
+}
+
+.claim_button {
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
 }

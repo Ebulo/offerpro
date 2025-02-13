@@ -1,5 +1,5 @@
 import { Offer } from "@/types/Offer";
-// import styles from "./details.module.css";
+import styles from "./details.module.css";
 import { Box, Chip, Typography } from "@mui/material";
 
 const DetailData = ({ offer }: { offer: Offer }) => {
@@ -19,7 +19,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
       >
         <Box
           component="img"
-          src={offer.offerImage}
+          src={offer.offerType.imageUrl ?? offer.offerImage}
           alt="Offer"
           sx={{
             width: "70px",
@@ -31,24 +31,31 @@ const DetailData = ({ offer }: { offer: Offer }) => {
 
         <Box sx={{ width: "80%", display: "flex", flexDirection: "column" }}>
           <Typography
-            sx={{ color: "white", fontSize: "18px", fontWeight: "bold" }}
+            sx={{ color: "var(--secondary-color)", fontSize: "14px" }}
+          >
+            {offer.offerType.name}
+          </Typography>
+          <Typography
+            sx={{ color: "white", fontSize: "15px", fontWeight: "bold" }}
           >
             {/* Offer Name */}
             {offer.name}
           </Typography>
-          <Typography sx={{ color: "gray", fontSize: "14px" }}>
-            {offer.offerType.name}
-          </Typography>
           <Chip
             label={offer.offerType.estTimeToComplete}
             sx={{
-              bgcolor: "transparent",
+              bgcolor: "var(--primary-color)",
               border: "1px solid var(--primary-color)",
-              color: "var(--primary-color)",
+              color: "white",
               width: "fit-content",
-              fontSize: "12px",
-              height: "24px",
-              borderRadius: "8px",
+              fontSize: "10px",
+              height: "unset",
+              // padding: "10px 10xp 10px 10px",
+              paddingTop: "4px",
+              paddingRight: "4px",
+              paddingBottom: "4px",
+              paddingLeft: "4px",
+              borderRadius: "20px",
             }}
           />
         </Box>
@@ -75,25 +82,43 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           padding: "10px",
         }}
       >
-        <Typography
-          sx={{ color: "#fff", fontSize: "17px", fontWeight: "bold" }}
-        >
-          How to claim this offer?
-        </Typography>
-        <div>
-          {Object.keys(JSON.parse(offer.offerType.description)).map(
-            (index, step) => {
-              if (step != 0)
-                return (
-                  <Typography
-                    sx={{ color: "#fff", fontSize: "14px" }}
-                    key={index}
-                  >
-                    {step}. {JSON.parse(offer.offerType.description)[step]}
-                  </Typography>
-                );
-            }
-          )}
+        <div className={styles.one_time}>
+          <p>Available to First time users only</p>
+        </div>
+        <div className={styles.instructions}>
+          <div className={styles.instruc_header}>
+            <Typography
+            // sx={{
+            //   color: "var(--text-color)",
+            //   fontSize: "17px",
+            //   fontWeight: "bold",
+            // }}
+            >
+              Instructions
+            </Typography>
+          </div>
+          <div className={styles.instruc_steps}>
+            {Object.keys(JSON.parse(offer.offerType.description)).map(
+              (index, step) => {
+                if (step != 0)
+                  return (
+                    <Typography
+                      sx={{
+                        color: "#fff",
+                        fontSize: "14px",
+                        padding: "8px 10px",
+                        background: "var(--card-bg)",
+                        marginBottom: "6px",
+                        borderRadius: "8px",
+                      }}
+                      key={index}
+                    >
+                      {step}. {JSON.parse(offer.offerType.description)[step]}
+                    </Typography>
+                  );
+              }
+            )}
+          </div>
         </div>
       </Box>
       {/* </div> */}

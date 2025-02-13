@@ -23,6 +23,13 @@ export type OfferType = {
   updatedAt: string;
 };
 
+export type QueryParams = {
+  userEmail: string;
+  advertisingId: string;
+  userId: string;
+  appId: number;
+};
+
 type ApiOfferType = {
   id: number;
   name: string;

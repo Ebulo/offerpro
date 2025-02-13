@@ -1,3 +1,4 @@
+"use client";
 import { Box } from "@mui/material";
 import OfferCard, { HistoryCard } from "./OfferCard";
 // import { Router } from "next/router";
@@ -185,6 +186,40 @@ const history = [
   },
 ];
 
+// const OfferList = ({ offers }: { offers: Offer[] }) => {
+//   const router = useRouter();
+
+//   return (
+//     <Box
+//       sx={{
+//         width: "100%",
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         flexDirection: "column",
+//       }}
+//     >
+//       {offers.map((offer, index) => (
+//         <OfferCard
+//           key={index}
+//           offerDetails={offer}
+//           onClick={() => {
+//             console.log("hey aayyyyyyyyyyyy");
+//             router.push(`/detail/${offer.id}/`);
+//           }}
+//         />
+//       ))}
+//     </Box>
+//   );
+// };
+// export default OfferList;
+// "use client";
+
+// import { Box } from "@mui/material";
+// import { useRouter } from "next/navigation";
+// import OfferCard from "./OfferCard";
+// import { Offer } from "@/types/Offer";
+
 const OfferList = ({ offers }: { offers: Offer[] }) => {
   const router = useRouter();
 
@@ -198,19 +233,17 @@ const OfferList = ({ offers }: { offers: Offer[] }) => {
         flexDirection: "column",
       }}
     >
-      {offers.map((offer, index) => (
+      {offers.map((offer) => (
         <OfferCard
-          key={index}
+          key={offer.id}
           offerDetails={offer}
-          onClick={() => {
-            console.log("hey aayyyyyyyyyyyy");
-            router.push(`/detail/${offer.id}/`);
-          }}
+          onClick={() => router.push(`/detail/${offer.id}`)}
         />
       ))}
     </Box>
   );
 };
+
 export default OfferList;
 
 export const HistoryList: React.FC = () => {
