@@ -25,7 +25,7 @@ import styles from "./home.module.css";
 import { useQueryParams } from "@/hooks/useQueryParams";
 // import { useFetchTasks } from "@/hooks/useFetchTasks";
 import { Offer } from "@/types/Offer";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { fetchTasks } from "@/services/api";
 import Banner from "@/components/Banner";
 import Tabs from "@/components/Tabs";
@@ -61,12 +61,14 @@ export default function Home() {
   // );
   return (
     <>
-      <div className={styles.main_content}>
-        <div className={styles.headers}>
-          <Banner />
-          <Tabs offers={offers} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <div className={styles.main_content}>
+          <div className={styles.headers}>
+            <Banner />
+            <Tabs offers={offers} />
+          </div>
         </div>
-      </div>
+      </Suspense>
     </>
   );
 }
