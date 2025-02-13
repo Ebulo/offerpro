@@ -6,10 +6,17 @@ import { parseOfferList } from "@/types/Offer";
 const BASE_URL = "https://server.offerpro.io/api";
 
 export const fetchTasks = async (params: QueryParams) => {
-  const url = `${BASE_URL}/tasks/?ordering=cpc`;
+  const url = `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=false`;
+
+  console.log("Hey iuhcuishiuce", {
+    user_email: params.userEmail,
+    advertising_id: params.advertisingId,
+    user_id: params.userId,
+    app_id: params.appId,
+  });
 
   const response = await fetch(url, {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
@@ -20,6 +27,8 @@ export const fetchTasks = async (params: QueryParams) => {
       app_id: params.appId,
     }),
   });
+
+  console.log("RESPONSE = ", response);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);

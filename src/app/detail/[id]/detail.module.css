@@ -1,13 +1,14 @@
 .main {
-    margin: 0;
-    padding: 0;
-    background: var(--page-bg);
-    height: 100vh;
-    max-width: 500px;
-    position: relative;
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg);
+  height: 100vh;
+  max-width: 500px;
+  position: relative;
 }
 
 .detail_top {
-    height: 90vh;
-    overflow-y: scroll;
+  height: 90vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }

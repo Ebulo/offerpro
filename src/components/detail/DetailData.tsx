@@ -7,6 +7,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
 
   return (
     <div>
+      {/* <div style={{ height: "10%" }}> */}
       <Box
         sx={{
           display: "flex",
@@ -61,6 +62,10 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           boxShadow: "0 10px 20px #4444",
         }}
       />
+      {/* </div> */}
+      {/* <div
+        style={{ height: "60%", overflowX: "scroll", scrollbarWidth: "none" }}
+      > */}
       <Box
         sx={{
           display: "flex",
@@ -91,6 +96,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           )}
         </div>
       </Box>
+      {/* </div> */}
     </div>
   );
 };

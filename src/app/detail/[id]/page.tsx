@@ -70,8 +70,30 @@ const OfferDetail = () => {
         <DetailBanner />
         <DetailData offer={offer} />
       </div>
-      <div style={{ width: "100%", padding: "10px 10px 25px 10px", height: "10vh", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center", bottom: "0", background: "#4442", backdropFilter: "blur(1)" }}>
-        <Button style={{ width: "90%", borderRadius: "10px", background: "var(--primary-color)", color: "var(--text-color)" }}>Get 10000 Coins</Button>
+      <div
+        style={{
+          width: "100%",
+          padding: "10px 10px 25px 10px",
+          height: "10vh",
+          position: "absolute",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          bottom: "0",
+          background: "#4442",
+          backdropFilter: "blur(1)",
+        }}
+      >
+        <Button
+          style={{
+            width: "90%",
+            borderRadius: "10px",
+            background: "var(--primary-color)",
+            color: "var(--text-color)",
+          }}
+        >
+          Get 10000 Coins
+        </Button>
       </div>
     </div>
   );

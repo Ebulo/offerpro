@@ -35,5 +35,7 @@ export const useQueryParams = (): QueryParams | null => {
     }
   }, [searchParams]);
 
+  console.log("Pramsmsmmsmsms: ", params);
+
   return params;
 };
