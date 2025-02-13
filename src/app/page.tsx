@@ -18,6 +18,7 @@ import styles from "./page.module.css";
 // import { useEffect, useState } from "react";
 // import { fetchTasks } from "@/services/api";
 import Home from "./home/page";
+import { Suspense } from "react";
 
 export default function Main() {
   // const queryParams = useQueryParams();
@@ -45,7 +46,9 @@ export default function Main() {
 
   return (
     <div className={styles.page}>
-      <Home />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Home />
+      </Suspense>
     </div>
   );
 }
