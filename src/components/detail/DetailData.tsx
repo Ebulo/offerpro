@@ -30,9 +30,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
         />
 
         <Box sx={{ width: "80%", display: "flex", flexDirection: "column" }}>
-          <Typography
-            sx={{ color: "var(--secondary-color)", fontSize: "14px" }}
-          >
+          <Typography sx={{ color: "var(--primary-color)", fontSize: "14px" }}>
             {offer.offerType.name}
           </Typography>
           <Typography
@@ -83,7 +81,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
         }}
       >
         <div className={styles.one_time}>
-          <p>Available to First time users only</p>
+          <p>Available to first time users only</p>
         </div>
         <div className={styles.instructions}>
           <div className={styles.instruc_header}>
@@ -94,7 +92,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
             //   fontWeight: "bold",
             // }}
             >
-              Instructions
+              Steps
             </Typography>
           </div>
           <div className={styles.instruc_steps}>
@@ -110,10 +108,29 @@ const DetailData = ({ offer }: { offer: Offer }) => {
                         background: "var(--card-bg)",
                         marginBottom: "6px",
                         borderRadius: "8px",
+                        textAlign: "left",
+                        display: "flex",
+                        alignItems: "center",
                       }}
                       key={index}
                     >
-                      {step}. {JSON.parse(offer.offerType.description)[step]}
+                      <div
+                        style={{
+                          borderRadius: "50px",
+                          // padding: "6px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          border: "2.1px solid var(--secondary-step-border)",
+                          background: "var(--secondary-step-bg)",
+                          width: "25px",
+                          height: "25px",
+                          marginRight: "8px",
+                        }}
+                      >
+                        {step}
+                      </div>
+                      {JSON.parse(offer.offerType.description)[step]}
                     </Typography>
                   );
               }

@@ -152,7 +152,7 @@ const OfferDetail = () => {
       <div
         style={{
           width: "100%",
-          padding: "10px 10px 40px 10px",
+          padding: "10px 10px 60px 10px",
           height: "15vh",
           position: "absolute",
           display: "flex",
