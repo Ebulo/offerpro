@@ -30,7 +30,7 @@ export type QueryParams = {
   appId: number;
 };
 
-type ApiOfferType = {
+export type ApiOfferType = {
   id: number;
   name: string;
   description: string;
@@ -40,7 +40,7 @@ type ApiOfferType = {
   updated_at: string;
 };
 
-type ApiOffer = {
+export type ApiOffer = {
   id: number;
   name: string;
   offer_image: string;

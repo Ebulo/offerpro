@@ -9,10 +9,9 @@
 
 .detail_top {
   height: 100dvh;
-  padding-bottom: 13vh;
+  padding: 0 0px 13vh 0px;
   overflow-y: scroll;
   scrollbar-width: none;
-  padding-bottom: "10px";
 }
 
 .bottom_container {

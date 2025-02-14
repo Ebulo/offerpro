@@ -81,7 +81,8 @@ function TabSelector(
           flex: 1,
           height: "7vh",
           textTransform: "none",
-          bgcolor: value === 0 ? "var(--secondary-background)" : "transparent",
+          // bgcolor: value === 0 ? "var(--secondary-background)" : "transparent",
+          bgcolor: value === 0 ? "#0002" : "transparent",
         }}
       />
 
@@ -106,7 +107,8 @@ function TabSelector(
           flex: 1,
           height: "7vh",
           textTransform: "none",
-          bgcolor: value === 1 ? "var(--secondary-background)" : "transparent",
+          // bgcolor: value === 1 ? "var(--secondary-background)" : "transparent",
+          bgcolor: value === 1 ? "#0002" : "transparent",
         }}
       />
     </Tabs>

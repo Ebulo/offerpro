@@ -7,4 +7,12 @@
 
 .headers {
   position: sticky;
+  top: 0;
+  height: 10dvh;
+}
+
+.offers {
+  height: 90dvh;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }

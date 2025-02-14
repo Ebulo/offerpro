@@ -4,18 +4,27 @@ import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { fetchTasks } from "@/services/api";
 import { Offer } from "@/types/Offer";
-import Banner from "@/components/Banner";
-import Tabs from "@/components/Tabs";
+// import Tabs from "@/components/Tabs";
 import styles from "./home.module.css";
+import TopHeader from "@/components/TopHeader";
+// import OngoingOffersCarousel from "@/components/offer/OngoingOffer";
+import OfferMain from "@/components/offer/OfferMain";
+import BottomNavBar from "@/components/botomNavBar/BottomNavBar";
+import Loader from "@/components/loader/Loader";
 
 export default function Home() {
   return (
     <div className={styles.main_content}>
       <div className={styles.headers}>
-        <Banner />
+        <TopHeader />
+      </div>
+      <div className={styles.offers}>
         <Suspense fallback={<p>Loading offers...</p>}>
           <OffersComponent />
         </Suspense>
+      </div>
+      <div>
+        <BottomNavBar />
       </div>
     </div>
   );
@@ -50,5 +59,8 @@ function OffersComponent() {
     fetchOffers();
   }, [searchParams]);
 
-  return <Tabs offers={offers} />;
+  if (offers.length == 0) return <Loader />;
+  // return <Tabs offers={offers} />;
+  // return <OngoingOffersCarousel offers={offers} />;
+  return <OfferMain offers={offers} />;
 }

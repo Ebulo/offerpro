@@ -1,6 +1,7 @@
 import { Offer } from "@/types/Offer";
 import styles from "./details.module.css";
 import { Box, Chip, Typography } from "@mui/material";
+import GuidelinesSection from "./Guidelines";
 
 const DetailData = ({ offer }: { offer: Offer }) => {
   console.log("Offerrr: ", offer);
@@ -153,6 +154,8 @@ const DetailData = ({ offer }: { offer: Offer }) => {
             )}
           </div>
         </div>
+
+        <GuidelinesSection />
       </Box>
       {/* </div> */}
     </div>

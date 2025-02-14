@@ -111,6 +111,7 @@ import { Button } from "@mui/material";
 import styles from "./detail.module.css";
 import { Offer } from "@/types/Offer";
 import { fetchTaskById } from "@/services/api";
+import Loader from "@/components/loader/Loader";
 // import { fetchOfferById } from "@/services/api"; // Create an API function
 
 const OfferDetail = () => {
@@ -122,9 +123,11 @@ const OfferDetail = () => {
     if (!id) return;
 
     const getOfferDetails = async () => {
+      setLoading(true);
       try {
         const data = await fetchTaskById(parseInt(id as string));
         setOffer(data);
+        // setLoading(false);
       } catch (error) {
         console.error("Failed to fetch offer details:", error);
       } finally {
@@ -135,7 +138,7 @@ const OfferDetail = () => {
     getOfferDetails();
   }, [id]);
 
-  if (loading) return <p>Loading offer details...</p>;
+  if (loading) return <Loader />;
   if (!offer) return <p>Offer not found.</p>;
 
   return (
@@ -159,11 +162,24 @@ const OfferDetail = () => {
           justifyContent: "center",
           alignItems: "center",
           bottom: "0",
-          // background: "var(--page-bg)",
-          background: "#2234",
+          background: "#2231",
           backdropFilter: "blur(4px)",
         }}
       >
+        <div
+          style={{
+            width: "100%",
+            padding: "10px 10px 10px 10px",
+            height: "11vh",
+            alignItems: "center",
+            bottom: "0",
+            background: "#2233",
+            // backdropFilter: "blur(4px)",
+            filter: "blur(10px)",
+            position: "absolute",
+            zIndex: "-1",
+          }}
+        ></div>
         <Button
           style={{
             width: "90%",

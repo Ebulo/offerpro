@@ -58,3 +58,53 @@ export const fetchTaskById = async (id: number) => {
   const data = await response.json();
   return parseOffer(data);
 };
+
+export const fetchInitOffers = async (params: QueryParams, status: string) => {
+  const url = `${BASE_URL}/postbacks/list_postback/`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: params.userId,
+      app_id: params.appId,
+      status: status,
+    }),
+  });
+
+  console.log("RESPONSE = ", response);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return parseOfferList(data.offer);
+};
+
+export const fetchPostbacks = async (params: QueryParams) => {
+  const url = `${BASE_URL}/postbacks/list_postback/`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: params.userId,
+      app_id: params.appId,
+      status: "ONGOING",
+    }),
+  });
+
+  console.log("RESPONSE = ", response);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return parseOfferList(data.offer);
+};
