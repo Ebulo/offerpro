@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   background: var(--page-bg);
-  height: 100vh;
+  height: 100dvh;
 }
 
 .headers {

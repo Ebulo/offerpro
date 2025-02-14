@@ -152,28 +152,35 @@ const OfferDetail = () => {
       <div
         style={{
           width: "100%",
-          padding: "10px 10px 60px 10px",
-          height: "15vh",
+          padding: "10px 10px 10px 10px",
+          height: "10vh",
           position: "absolute",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           bottom: "0",
-          background: "var(--page-bg)",
+          // background: "var(--page-bg)",
+          background: "#2234",
           backdropFilter: "blur(4px)",
         }}
       >
         <Button
           style={{
             width: "90%",
-            padding: "13px",
-            borderRadius: "10px",
+            padding: "11px",
+            borderRadius: "30px",
             background: "var(--primary-color)",
             color: "white",
           }}
+          onClick={() => {
+            if (offer?.offerLink) {
+              window.open(offer.offerLink, "_blank"); // Opens in a new tab
+            } else {
+              console.warn("Offer link is missing!");
+            }
+          }}
         >
-          {/* Get {offer.rewardCoins} Coins */}
-          Start This Offer
+          Proceed To Offer
         </Button>
       </div>
     </div>

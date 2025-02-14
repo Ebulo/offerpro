@@ -67,10 +67,6 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           boxShadow: "0 10px 20px #4444",
         }}
       />
-      {/* </div> */}
-      {/* <div
-        style={{ height: "60%", overflowX: "scroll", scrollbarWidth: "none" }}
-      > */}
       <Box
         sx={{
           display: "flex",
@@ -85,39 +81,43 @@ const DetailData = ({ offer }: { offer: Offer }) => {
         </div>
         <div className={styles.instructions}>
           <div className={styles.instruc_header}>
-            <Typography
-            // sx={{
-            //   color: "var(--text-color)",
-            //   fontSize: "17px",
-            //   fontWeight: "bold",
-            // }}
-            >
-              Steps
-            </Typography>
+            <Typography>Steps</Typography>
           </div>
           <div className={styles.instruc_steps}>
             {Object.keys(JSON.parse(offer.offerType.description)).map(
               (index, step) => {
-                if (step != 0)
-                  return (
-                    <Typography
-                      sx={{
+                console.log(JSON.parse(offer.offerType.description));
+                // if (step != 0)
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      color: "#fff",
+                      fontSize: "14px",
+                      padding: "10px 15px",
+                      background: "var(--card-bg)",
+                      marginBottom: "8px",
+                      margin: "0 2px 8px 2px",
+                      borderRadius: "8px",
+                      textAlign: "left",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div
+                      style={{
                         color: "#fff",
                         fontSize: "14px",
-                        padding: "8px 10px",
                         background: "var(--card-bg)",
-                        marginBottom: "6px",
                         borderRadius: "8px",
                         textAlign: "left",
                         display: "flex",
                         alignItems: "center",
                       }}
-                      key={index}
                     >
                       <div
                         style={{
                           borderRadius: "50px",
-                          // padding: "6px",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
@@ -128,11 +128,27 @@ const DetailData = ({ offer }: { offer: Offer }) => {
                           marginRight: "8px",
                         }}
                       >
-                        {step}
+                        {step + 1}
                       </div>
-                      {JSON.parse(offer.offerType.description)[step]}
-                    </Typography>
-                  );
+                    </div>
+                    <div>
+                      <Typography
+                        sx={{
+                          color: "#fff",
+                          fontSize: "14px",
+                          background: "var(--card-bg)",
+                          borderRadius: "8px",
+                          textAlign: "left",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                        key={index + 1}
+                      >
+                        {JSON.parse(offer.offerType.description)[step + 1]}
+                      </Typography>
+                    </div>
+                  </div>
+                );
               }
             )}
           </div>
