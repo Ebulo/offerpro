@@ -2,17 +2,17 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { fetchOngoingOffers, fetchTasks } from "@/services/api";
+import { fetchTasks } from "@/services/api";
 import { Offer } from "@/types/Offer";
 // import Tabs from "@/components/Tabs";
-import styles from "./home.module.css";
+import styles from "./history.module.css";
 import TopHeader from "@/components/TopHeader";
 // import OngoingOffersCarousel from "@/components/offer/OngoingOffer";
-import OfferMain from "@/components/offer/OfferMain";
 import BottomNavBar from "@/components/botomNavBar/BottomNavBar";
 import Loader from "@/components/loader/Loader";
+import HistoryMain from "@/components/history/HistoryMain";
 
-export default function Home() {
+export default function History() {
   return (
     <div className={styles.main_content}>
       <div className={styles.headers}>
@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       <div className={styles.offers}>
         <Suspense fallback={<p>Loading offers...</p>}>
-          <OffersComponent />
+          <HistoryComponent />
         </Suspense>
       </div>
       <div className={styles.bottom_navbar}>
@@ -30,10 +30,9 @@ export default function Home() {
   );
 }
 
-function OffersComponent() {
+function HistoryComponent() {
   const searchParams = useSearchParams();
-  const [offers, setOffers] = useState<Offer[]>([]);
-  const [ongoingOffers, setOngoingOffers] = useState<Offer[]>([]);
+  const [history, setHistory] = useState<Offer[]>([]);
 
   const updateQueryInLocalStorage = () => {
     const userEmail = searchParams.get("uemail") ?? "";
@@ -72,32 +71,17 @@ function OffersComponent() {
           userId,
           appId,
         });
-        setOffers(data);
+        setHistory(data);
       } catch (error) {
         console.error("Failed to fetch offers:", error);
       }
     };
 
-    const fetchOngoing = async () => {
-      try {
-        const data = await fetchOngoingOffers({
-          userEmail,
-          advertisingId,
-          userId,
-          appId,
-        });
-        setOngoingOffers(data);
-      } catch (error) {
-        console.error("Failed to fetch offers:", error);
-      }
-    };
-
-    fetchOngoing();
     fetchOffers();
   }, [searchParams]);
 
-  if (offers.length == 0 || ongoingOffers.length == 0) return <Loader />;
+  if (history.length == 0) return <Loader />;
   // return <Tabs offers={offers} />;
   // return <OngoingOffersCarousel offers={offers} />;
-  return <OfferMain offers={offers} ongoingOffers={ongoingOffers} />;
+  return <HistoryMain history={history} />;
 }

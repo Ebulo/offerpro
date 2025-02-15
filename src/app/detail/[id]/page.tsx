@@ -212,7 +212,7 @@ const OfferDetail = () => {
           width: "100%",
           maxWidth: "500px",
           padding: "10px",
-          height: "10vh", // Restricts the height
+          height: "12vh", // Restricts the height
           position: "fixed",
           bottom: "0",
           display: "flex",
@@ -230,17 +230,19 @@ const OfferDetail = () => {
             position: "absolute",
             bottom: "0", // Ensures image starts from the bottom
             width: "100%",
-            height: "100%",
+            height: "100% + 20px",
             objectFit: "cover", // Ensures full coverage
             objectPosition: "top", // Aligns the top (blurred part) correctly
             zIndex: "-1",
+            // opacity: "0.6",
+            // backdropFilter: "blur(10px)",
           }}
         />
 
         <Button
           style={{
             width: "90%",
-            padding: "11px",
+            padding: "14px",
             borderRadius: "30px",
             background: "var(--primary-color)",
             color: "white",

@@ -1,8 +1,14 @@
 // http://localhost:3000/?uemail=admin@gmail.com&ad_id=123e4567-e89b-12d3-a456-426614174000&uid=huihi79h78ytfy&aid=1
 // http://192.168.216.198:3000/?uemail=admin@gmail.com&ad_id=123e4567-e89b-12d3-a456-426614174000&uid=huihi79h78ytfy&aid=1
 
-import { parseOffer, parseOfferList, QueryParams } from "@/types/Offer";
+import {
+  fetchOffersFromPostbckList,
+  parseOffer,
+  parseOfferList,
+  QueryParams,
+} from "@/types/Offer";
 import { ApiBaseUrl } from "./config";
+import { parsePostbackList } from "@/types/Postback";
 
 const BASE_URL = ApiBaseUrl;
 
@@ -59,7 +65,10 @@ export const fetchTaskById = async (id: number) => {
   return parseOffer(data);
 };
 
-export const fetchInitOffers = async (params: QueryParams, status: string) => {
+export const fetchInitialisedOffers = async (
+  params: QueryParams,
+  status: string
+) => {
   const url = `${BASE_URL}/postbacks/list_postback/`;
 
   const response = await fetch(url, {
@@ -84,7 +93,7 @@ export const fetchInitOffers = async (params: QueryParams, status: string) => {
   return parseOfferList(data.offer);
 };
 
-export const fetchPostbacks = async (params: QueryParams) => {
+export const fetchOngoingOffers = async (params: QueryParams) => {
   const url = `${BASE_URL}/postbacks/list_postback/`;
 
   const response = await fetch(url, {
@@ -99,12 +108,13 @@ export const fetchPostbacks = async (params: QueryParams) => {
     }),
   });
 
-  console.log("RESPONSE = ", response);
-
   if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
   const data = await response.json();
-  return parseOfferList(data.offer);
+  console.log("RESPONSE = ", response, data);
+  const postbacks = parsePostbackList(data);
+  console.log("RESPONSE = ", response, data, postbacks);
+  return fetchOffersFromPostbckList(postbacks);
 };

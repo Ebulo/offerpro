@@ -1,3 +1,5 @@
+import { Postback } from "./Postback";
+
 export type Offer = {
   id: number;
   name: string;
@@ -115,4 +117,17 @@ export const toJsonOffer = (offer: Offer): ApiOffer => {
     reward_coins: offer.rewardCoins,
     status: offer.status,
   };
+};
+
+export const fetchOffersFromPostbckList = (postbacks: Postback[]): Offer[] => {
+  // Create a Set to store unique offer IDs and avoid duplicates
+  const uniqueOffers = new Map<number, Offer>();
+
+  postbacks.forEach((postback) => {
+    if (!uniqueOffers.has(postback.offer.id)) {
+      uniqueOffers.set(postback.offer.id, postback.offer);
+    }
+  });
+
+  return Array.from(uniqueOffers.values());
 };

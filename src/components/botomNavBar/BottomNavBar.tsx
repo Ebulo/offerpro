@@ -73,7 +73,7 @@
 "use client";
 
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import HistoryIcon from "@mui/icons-material/History";
@@ -82,7 +82,7 @@ import styles from "./bottomnavbar.module.css";
 
 const BottomNavBar: React.FC = () => {
   const [value, setValue] = useState(0);
-  // const router = useRouter();
+  const router = useRouter();
 
   return (
     <div className={styles.bottomnav_main}>
@@ -113,7 +113,7 @@ const BottomNavBar: React.FC = () => {
           onChange={(event, newValue) => {
             setValue(newValue);
             // if (newValue === 0) router.push("/offers");
-            // if (newValue === 1) router.push("/history");
+            if (newValue === 1) router.push("/history");
             // if (newValue === 2) router.push("/filters");
           }}
           sx={{
