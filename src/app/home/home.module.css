@@ -3,6 +3,7 @@
   padding: 0;
   background: var(--page-bg);
   height: 100dvh;
+  position: relative;
 }
 
 .headers {
@@ -15,4 +16,8 @@
   height: 90dvh;
   overflow-y: scroll;
   scrollbar-width: none;
+}
+
+.bottom_navbar {
+  width: 100%;
 }

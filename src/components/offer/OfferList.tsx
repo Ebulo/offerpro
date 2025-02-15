@@ -14,7 +14,7 @@ const OffersList: React.FC<{ offers: Offer[] }> = ({ offers }) => {
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
-        paddingBottom: "70px",
+        paddingBottom: "95px",
       }}
     >
       <Typography

@@ -36,8 +36,8 @@ const OfferCard = ({
           src={offerDetails.offerImage}
           alt="Offer"
           sx={{
-            width: "50px",
-            height: "50px",
+            width: "60px",
+            height: "60px",
             objectFit: "cover",
             borderRadius: "12px",
           }}

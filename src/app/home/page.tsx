@@ -23,7 +23,7 @@ export default function Home() {
           <OffersComponent />
         </Suspense>
       </div>
-      <div>
+      <div className={styles.bottom_navbar}>
         <BottomNavBar />
       </div>
     </div>
