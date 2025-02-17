@@ -11,6 +11,7 @@ import TopHeader from "@/components/TopHeader";
 import OfferMain from "@/components/offer/OfferMain";
 import BottomNavBar from "@/components/botomNavBar/BottomNavBar";
 import Loader from "@/components/loader/Loader";
+import { getQueryParams } from "@/services/getQueryParams";
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
         </Suspense>
       </div>
       <div className={styles.bottom_navbar}>
-        <BottomNavBar />
+        <BottomNavBar defaultValue={0} />
       </div>
     </div>
   );
@@ -57,20 +58,26 @@ function OffersComponent() {
 
   useEffect(() => {
     updateQueryInLocalStorage();
-    const userEmail = searchParams.get("uemail") ?? "";
-    const advertisingId = searchParams.get("ad_id") ?? "";
-    const userId = searchParams.get("uid") ?? "";
-    const appId = Number(searchParams.get("aid")) || 1;
+    // const userEmail = searchParams.get("uemail") ?? "";
+    // const advertisingId = searchParams.get("ad_id") ?? "";
+    // const userId = searchParams.get("uid") ?? "";
+    // const appId = Number(searchParams.get("aid")) || 1;
 
-    if (!userEmail || !advertisingId || !userId) return;
+    // if (!userEmail || !advertisingId || !userId) return;
+    const queryParams = getQueryParams();
+    if (!queryParams) return;
 
     const fetchOffers = async () => {
       try {
         const data = await fetchTasks({
-          userEmail,
-          advertisingId,
-          userId,
-          appId,
+          // userEmail,
+          // advertisingId,
+          // userId,
+          // appId,
+          userEmail: queryParams.userEmail,
+          advertisingId: queryParams.advertisingId,
+          userId: queryParams.userId,
+          appId: queryParams.appId,
         });
         setOffers(data);
       } catch (error) {
@@ -81,10 +88,10 @@ function OffersComponent() {
     const fetchOngoing = async () => {
       try {
         const data = await fetchOngoingOffers({
-          userEmail,
-          advertisingId,
-          userId,
-          appId,
+          userEmail: queryParams.userEmail,
+          advertisingId: queryParams.advertisingId,
+          userId: queryParams.userId,
+          appId: queryParams.appId,
         });
         setOngoingOffers(data);
       } catch (error) {

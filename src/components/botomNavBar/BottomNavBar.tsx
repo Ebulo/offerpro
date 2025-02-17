@@ -80,8 +80,8 @@ import HistoryIcon from "@mui/icons-material/History";
 import TuneIcon from "@mui/icons-material/Tune";
 import styles from "./bottomnavbar.module.css";
 
-const BottomNavBar: React.FC = () => {
-  const [value, setValue] = useState(0);
+const BottomNavBar: React.FC<{ defaultValue: number }> = ({ defaultValue }) => {
+  const [value, setValue] = useState(defaultValue);
   const router = useRouter();
 
   return (

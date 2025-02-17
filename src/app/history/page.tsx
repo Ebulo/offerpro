@@ -11,6 +11,7 @@ import TopHeader from "@/components/TopHeader";
 import BottomNavBar from "@/components/botomNavBar/BottomNavBar";
 import Loader from "@/components/loader/Loader";
 import HistoryMain from "@/components/history/HistoryMain";
+import { getQueryParams } from "@/services/getQueryParams";
 
 export default function History() {
   return (
@@ -24,7 +25,7 @@ export default function History() {
         </Suspense>
       </div>
       <div className={styles.bottom_navbar}>
-        <BottomNavBar />
+        <BottomNavBar defaultValue={1} />
       </div>
     </div>
   );
@@ -56,20 +57,20 @@ function HistoryComponent() {
 
   useEffect(() => {
     updateQueryInLocalStorage();
-    const userEmail = searchParams.get("uemail") ?? "";
-    const advertisingId = searchParams.get("ad_id") ?? "";
-    const userId = searchParams.get("uid") ?? "";
-    const appId = Number(searchParams.get("aid")) || 1;
 
-    if (!userEmail || !advertisingId || !userId) return;
+    const queryParams = getQueryParams();
+    if (!queryParams) return;
 
     const fetchOffers = async () => {
       try {
         const data = await fetchTasks({
-          userEmail,
-          advertisingId,
-          userId,
-          appId,
+          userEmail: queryParams.userEmail,
+          advertisingId: queryParams.advertisingId,
+          userId: queryParams.userId,
+          appId: queryParams.appId,
+          // advertisingId,
+          // userId,
+          // appId,
         });
         setHistory(data);
       } catch (error) {
