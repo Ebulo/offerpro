@@ -36,6 +36,7 @@ function OffersComponent() {
   const searchParams = useSearchParams();
   const [offers, setOffers] = useState<Offer[]>([]);
   const [ongoingOffers, setOngoingOffers] = useState<Offer[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const updateQueryInLocalStorage = () => {
     const userEmail = searchParams.get("uemail") ?? "";
@@ -69,6 +70,7 @@ function OffersComponent() {
     if (!queryParams) return;
 
     const fetchOffers = async () => {
+      setLoading(true);
       try {
         const data = await fetchTasks({
           userEmail: queryParams.userEmail,
@@ -79,10 +81,13 @@ function OffersComponent() {
         setOffers(data);
       } catch (error) {
         console.error("Failed to fetch offers:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     const fetchOngoing = async () => {
+      setLoading(true);
       try {
         const data = await fetchOngoingOffers({
           userEmail: queryParams.userEmail,
@@ -94,6 +99,8 @@ function OffersComponent() {
         setOngoingOffers(data);
       } catch (error) {
         console.error("Failed to fetch offers:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -101,9 +108,15 @@ function OffersComponent() {
     fetchOffers();
   }, [searchParams]);
 
-  if (!getQueryParams()) return <NoOffersAvailable title="No Offers!" subtitle="It seems like you have completed all the available offers. Please check back later." />
+  if (!getQueryParams())
+    return (
+      <NoOffersAvailable
+        title="No Offers!"
+        subtitle="It seems like you have completed all the available offers. Please check back later."
+      />
+    );
 
-  // return <Tabs offers={offers} />;
-  // return <OngoingOffersCarousel offers={offers} />;
+  if (loading) return <Loader />;
+
   return <OfferMain offers={offers} ongoingOffers={ongoingOffers} />;
 }

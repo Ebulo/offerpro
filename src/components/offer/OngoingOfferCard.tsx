@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { Offer } from "@/types/Offer";
 import { useRouter } from "next/navigation";
+import CoinButton from "../buttons/CoinButton";
 
 const OngoingOfferCard: React.FC<{ offer: Offer }> = ({ offer }) => {
   const router = useRouter();
@@ -79,25 +80,7 @@ const OngoingOfferCard: React.FC<{ offer: Offer }> = ({ offer }) => {
             </Typography>
           </Box>
         </Box>
-
-        {/* Right Section (Reward + Button) */}
-        <Box
-          sx={{
-            textAlign: "center",
-            background: "var(--primary-color)",
-            padding: "6px 12px",
-            borderRadius: "10px",
-            display: "flex",
-            alignItems: "right",
-            justifyContent: "right",
-            flexDirection: "column",
-          }}
-        >
-          <Typography fontSize="0.7em">Up To</Typography>
-          <Typography fontWeight="bold">
-            🪙 {offer.rewardCoins.toLocaleString()}
-          </Typography>
-        </Box>
+        <CoinButton mainText={offer.rewardCoins.toLocaleString()} />
       </CardContent>
     </Card>
   );

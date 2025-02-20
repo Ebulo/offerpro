@@ -6,9 +6,7 @@ const OfferMain: React.FC<{ offers: Offer[]; ongoingOffers: Offer[] }> = ({
   offers,
   ongoingOffers,
 }) => {
-  // Collect Ongoing Offers here
-  // Fetch Untracked Offers here
-  console.log("onhuih: ", ongoingOffers);
+  // console.log("onhuih: ", ongoingOffers);
 
   return (
     <div>

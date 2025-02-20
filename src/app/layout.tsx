@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Offer Pro",
-  description: "The Best Offers crafted specifically by the top players in the market",
+  description:
+    "The Best Offers crafted specifically by the top players in the market",
 };
 
 export default function RootLayout({

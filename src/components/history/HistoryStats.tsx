@@ -1,10 +1,17 @@
 import React from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import { Offer } from "@/types/Offer";
+import { Postback } from "@/types/Postback";
 // import styles from "./history.module.css";
 
-const HistoryStats: React.FC<{ offer: Offer[] }> = ({ offer }) => {
-  console.log("Offer: ", offer);
+const HistoryStats: React.FC<{ history: Postback[] }> = ({ history }) => {
+  // console.log("Offer: ", history);
+
+  const ongoingCount = history.filter(
+    (postback) => postback.status === "ONGOING"
+  ).length;
+  const completedCount = history.filter(
+    (postback) => postback.status === "COMPLETED"
+  ).length;
 
   return (
     <Box
@@ -44,7 +51,8 @@ const HistoryStats: React.FC<{ offer: Offer[] }> = ({ offer }) => {
             <Typography
               sx={{ fontSize: "20px", fontWeight: "bold", color: "white" }}
             >
-              123
+              {/* 123 */}
+              {ongoingCount}
             </Typography>
             <Typography sx={{ fontSize: "12px", color: "white" }}>
               Ongoing Offers.
@@ -55,7 +63,8 @@ const HistoryStats: React.FC<{ offer: Offer[] }> = ({ offer }) => {
             <Typography
               sx={{ fontSize: "20px", fontWeight: "bold", color: "white" }}
             >
-              12
+              {/* 12 */}
+              {completedCount}
             </Typography>
             <Typography sx={{ fontSize: "12px", color: "white" }}>
               Complete Offers

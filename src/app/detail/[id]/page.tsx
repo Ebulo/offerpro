@@ -6,11 +6,17 @@ import DetailData from "@/components/detail/DetailData";
 import { Button } from "@mui/material";
 import styles from "./detail.module.css";
 import { Offer } from "@/types/Offer";
-import { checkPostback, claimPostback, createPostback, fetchTaskById } from "@/services/api";
+import {
+  checkPostback,
+  claimPostback,
+  createPostback,
+  fetchTaskById,
+} from "@/services/api";
 import Loader from "@/components/loader/Loader";
 import NoOffersAvailable from "@/components/noOffers/NoOffer";
 import { Send, Upload } from "@mui/icons-material";
 import { getQueryParams } from "@/services/getQueryParams";
+
 // import { fetchOfferById } from "@/services/api"; // Create an API function
 
 const OfferDetail = () => {
@@ -19,7 +25,7 @@ const OfferDetail = () => {
   const [offer, setOffer] = useState<Offer | null>(null);
 
   const [loading, setLoading] = useState(true);
-  const [offerStatus, setOfferStatus] = useState<string | null>(null)
+  const [offerStatus, setOfferStatus] = useState<string | null>(null);
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -32,6 +38,7 @@ const OfferDetail = () => {
   const handleSubmit = async () => {
     if (!selectedFile) {
       console.warn("No file selected!");
+      alert("You must attach an image first");
       return;
     }
     try {
@@ -48,7 +55,6 @@ const OfferDetail = () => {
     try {
       const data = await fetchTaskById(parseInt(id as string));
       setOffer(data);
-      // setLoading(false);
     } catch (error) {
       console.error("Failed to fetch offer details:", error);
     } finally {
@@ -98,7 +104,13 @@ const OfferDetail = () => {
   }, [id]);
 
   if (loading) return <Loader />;
-  if (!offer) return <NoOffersAvailable title={"Offer not found"} subtitle={"This is not a valid offer, please check and confirm"} />;
+  if (!offer)
+    return (
+      <NoOffersAvailable
+        title={"Offer not found"}
+        subtitle={"This is not a valid offer, please check and confirm"}
+      />
+    );
 
   return (
     <div className={styles.main}>
@@ -111,77 +123,82 @@ const OfferDetail = () => {
   );
 
   function proceedToOfferBtn() {
-    return <div
-      className={styles.fixed_bottom_container}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/img/blur_bg_btn.png"
-        alt="bg_img"
-        className={styles.bg_img} />
+    return (
+      <div className={styles.fixed_bottom_container}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/img/blur_bg_btn.png"
+          alt="bg_img"
+          className={styles.bg_img}
+        />
 
-      <Button
-        style={{
-          width: "95%",
-          padding: "14px",
-          borderRadius: "30px",
-          background: "var(--primary-color)",
-          color: "white",
-          position: "relative",
-          zIndex: "1",
-        }}
-        // onClick={() => {
-        //   if (offer?.offerLink) {
-        //     window.open(offer.offerLink, "_blank");
-        //   } else {
-        //     console.warn("Offer link is missing!");
-        //   }
-        // }}
-        onClick={handleProceedToOffer}
-      >
-        Proceed To Offer
-      </Button>
-      {offerStatus == "ONGOING" ? submitButtonGroup() : ""}
-    </div>;
+        <Button
+          style={{
+            width: "95%",
+            padding: "14px",
+            borderRadius: "30px",
+            background: "var(--primary-color)",
+            color: "white",
+            position: "relative",
+            zIndex: "1",
+          }}
+          onClick={handleProceedToOffer}
+        >
+          Proceed To Offer
+        </Button>
+        {offerStatus == "ONGOING" ? submitButtonGroup() : ""}
+      </div>
+    );
   }
 
   function submitButtonGroup() {
-    return <div className={styles.submit_btn_cont}>
-      <input type="file" onChange={handleFileUpload} className={styles.hidden_input} />
-      <Button
-        startIcon={<Upload />}
-        style={{
-          width: "85%",
-          padding: "14px",
-          borderRadius: "30px",
-          background: "#4442",
-          color: "white",
-          position: "relative",
-          zIndex: "1",
-        }}
-        onClick={() => (document.querySelector(`.${styles.hidden_input}`) as HTMLInputElement | null)?.click()}
-
-      >
-        Upload
-      </Button>
-      <Button
-        startIcon={<Send />}
-        style={{
-          width: "60%",
-          padding: "14px",
-          borderRadius: "30px",
-          background: "var(--text-color)",
-          color: "var(--primary-color)",
-          position: "relative",
-          zIndex: "1",
-        }}
-        onClick={handleSubmit}
-      >
-        Submit
-      </Button>
-    </div>;
+    return (
+      <div className={styles.submit_btn_cont}>
+        <input
+          type="file"
+          onChange={handleFileUpload}
+          className={styles.hidden_input}
+        />
+        <Button
+          startIcon={<Upload />}
+          style={{
+            width: "85%",
+            padding: "14px",
+            borderRadius: "30px",
+            border: selectedFile == null ? "none" : "1px solid #fff",
+            background: "#4442",
+            color: "white",
+            position: "relative",
+            zIndex: "1",
+          }}
+          onClick={() =>
+            (
+              document.querySelector(
+                `.${styles.hidden_input}`
+              ) as HTMLInputElement | null
+            )?.click()
+          }
+        >
+          {selectedFile == null ? "Upload" : "Reupload"}
+        </Button>
+        <Button
+          startIcon={<Send />}
+          style={{
+            width: "60%",
+            padding: "14px",
+            borderRadius: "30px",
+            background: "var(--text-color)",
+            color: "var(--primary-color)",
+            position: "relative",
+            zIndex: "1",
+          }}
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </div>
+    );
   }
-
 };
 
 export default OfferDetail;

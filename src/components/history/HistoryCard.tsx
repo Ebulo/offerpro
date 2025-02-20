@@ -2,12 +2,13 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { Offer } from "@/types/Offer";
+import CoinButton from "../buttons/CoinButton";
 
 const HistoryCard: React.FC<{ offer: Offer }> = ({ offer }) => {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "98%",
         bgcolor: "var(--card-bg)",
         borderRadius: "16px",
         // padding: "8px",
@@ -18,54 +19,60 @@ const HistoryCard: React.FC<{ offer: Offer }> = ({ offer }) => {
         cursor: "pointer",
         transition: "all 0.3s ease",
         "&:hover": { opacity: 0.9 },
-        margin: "10px 0",
+        margin: "10px 2px",
       }}
-      onClick={() => { }}
+      onClick={() => {}}
     >
       {/* First Row */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        {/* Offer Image */}
-        <Box
-          component="img"
-          src={offer.offerImage}
-          alt="Offer"
-          sx={{
-            width: "60px",
-            height: "60px",
-            objectFit: "cover",
-            borderRadius: "12px",
-          }}
-        />
-
-        {/* Offer Details */}
-        <Box sx={{ width: "85%", display: "flex", flexDirection: "column" }}>
-          <Typography sx={{ color: "gray", fontSize: "12px" }}>
-            {offer.offerType.name}
-          </Typography>
-          <Typography
-            sx={{ color: "white", fontSize: "16px", fontWeight: "bold" }}
-          >
-            {/* Offer Name */}
-            {offer.name}
-          </Typography>
-        </Box>
-        {/* <Box
-          sx={{
-            textAlign: "center",
-            background: "var(--primary-color)",
-            padding: "6px 12px",
-            borderRadius: "10px",
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          justifyContent: "space-between",
+        }}
+      >
+        <div
+          style={{
             display: "flex",
-            alignItems: "right",
-            justifyContent: "right",
-            flexDirection: "column",
+            alignItems: "center",
+            gap: 2,
+            width: "60%",
           }}
         >
-          <Typography fontSize="0.7em">Up To</Typography>
-          <Typography fontWeight="bold">
-            🪙 {offerDetails.rewardCoins.toLocaleString()}
-          </Typography>
-        </Box> */}
+          <Box
+            component="img"
+            src={offer.offerImage}
+            alt="Offer"
+            sx={{
+              width: "60px",
+              height: "60px",
+              objectFit: "cover",
+              borderRadius: "12px",
+            }}
+          />
+
+          <Box
+            sx={{
+              width: "80%",
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: "10px",
+            }}
+          >
+            <Typography sx={{ color: "gray", fontSize: "12px" }}>
+              {offer.offerType.name}
+            </Typography>
+            <Typography
+              sx={{ color: "white", fontSize: "16px", fontWeight: "bold" }}
+            >
+              {/* Offer Name */}
+              {offer.name}
+            </Typography>
+          </Box>
+        </div>
+
+        <CoinButton mainText={offer.rewardCoins.toString()} />
       </Box>
     </Box>
   );

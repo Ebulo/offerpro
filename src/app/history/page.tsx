@@ -2,8 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { fetchTasks } from "@/services/api";
-import { Offer } from "@/types/Offer";
+import { fetchHistory } from "@/services/api";
 // import Tabs from "@/components/Tabs";
 import styles from "./history.module.css";
 import TopHeader from "@/components/TopHeader";
@@ -13,6 +12,7 @@ import Loader from "@/components/loader/Loader";
 import HistoryMain from "@/components/history/HistoryMain";
 import { getQueryParams } from "@/services/getQueryParams";
 import NoOffersAvailable from "@/components/noOffers/NoOffer";
+import { Postback } from "@/types/Postback";
 
 export default function History() {
   return (
@@ -34,7 +34,7 @@ export default function History() {
 
 function HistoryComponent() {
   const searchParams = useSearchParams();
-  const [history, setHistory] = useState<Offer[]>([]);
+  const [history, setHistory] = useState<Postback[]>([]);
 
   const updateQueryInLocalStorage = () => {
     const userEmail = searchParams.get("uemail") ?? "";
@@ -62,27 +62,25 @@ function HistoryComponent() {
     const queryParams = getQueryParams();
     if (!queryParams) return;
 
-    const fetchOffers = async () => {
+    const getHistory = async () => {
       try {
-        const data = await fetchTasks({
-          userEmail: queryParams.userEmail,
-          advertisingId: queryParams.advertisingId,
-          userId: queryParams.userId,
-          appId: queryParams.appId,
-          // advertisingId,
-          // userId,
-          // appId,
-        });
+        const data = await fetchHistory(queryParams, "");
         setHistory(data);
       } catch (error) {
         console.error("Failed to fetch offers:", error);
       }
     };
 
-    fetchOffers();
+    getHistory();
   }, [searchParams]);
 
-  if (!getQueryParams()) return <NoOffersAvailable title="No History!" subtitle="It seems like you have not completed any offers. Check offers tab to check available offers." />
+  if (!getQueryParams())
+    return (
+      <NoOffersAvailable
+        title="No History!"
+        subtitle="It seems like you have not completed any offers. Check offers tab to check available offers."
+      />
+    );
 
   if (history.length == 0) return <Loader />;
   // return <Tabs offers={offers} />;

@@ -2,9 +2,10 @@ import { Offer } from "@/types/Offer";
 import styles from "./details.module.css";
 import { Box, Chip, Typography } from "@mui/material";
 import GuidelinesSection from "./Guidelines";
+import CoinButton from "../buttons/CoinButton";
 
 const DetailData = ({ offer }: { offer: Offer }) => {
-  // console.log("Offerrr: ", offer);
+  console.log("Offerrr: ", offer);
 
   return (
     <div>
@@ -30,7 +31,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           }}
         />
 
-        <Box sx={{ width: "80%", display: "flex", flexDirection: "column" }}>
+        <Box sx={{ width: "43%", display: "flex", flexDirection: "column" }}>
           <Typography sx={{ color: "var(--primary-color)", fontSize: "14px" }}>
             {offer.offerType.name}
           </Typography>
@@ -58,11 +59,22 @@ const DetailData = ({ offer }: { offer: Offer }) => {
             }}
           />
         </Box>
+
+        <CoinButton
+          mainText={offer.rewardCoins ? offer.rewardCoins.toString() : "0"}
+        />
       </Box>
       <Typography
-        sx={{ color: "#fffa", fontSize: "15px", fontWeight: "normal", padding: "10px 15px" }}
+        sx={{
+          color: "#fffa",
+          fontSize: "15px",
+          fontWeight: "normal",
+          padding: "10px 15px",
+        }}
       >
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto fugiat expedita repudiandae distinctio dolor neque sunt voluptate accusantium iste et.
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto fugiat
+        expedita repudiandae distinctio dolor neque sunt voluptate accusantium
+        iste et.
       </Typography>
       <hr
         style={{
