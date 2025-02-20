@@ -12,6 +12,7 @@ import OfferMain from "@/components/offer/OfferMain";
 import BottomNavBar from "@/components/botomNavBar/BottomNavBar";
 import Loader from "@/components/loader/Loader";
 import { getQueryParams } from "@/services/getQueryParams";
+import NoOffersAvailable from "@/components/noOffers/NoOffer";
 
 export default function Home() {
   return (
@@ -103,7 +104,9 @@ function OffersComponent() {
     fetchOffers();
   }, [searchParams]);
 
+  if (!getQueryParams()) return <NoOffersAvailable title="No Offers!" subtitle="It seems like you have completed all the available offers. Please check back later." />
   if (offers.length == 0 || ongoingOffers.length == 0) return <Loader />;
+
   // return <Tabs offers={offers} />;
   // return <OngoingOffersCarousel offers={offers} />;
   return <OfferMain offers={offers} ongoingOffers={ongoingOffers} />;

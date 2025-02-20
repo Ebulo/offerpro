@@ -59,6 +59,11 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           />
         </Box>
       </Box>
+      <Typography
+        sx={{ color: "#fffa", fontSize: "15px", fontWeight: "normal", padding: "10px 15px" }}
+      >
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto fugiat expedita repudiandae distinctio dolor neque sunt voluptate accusantium iste et.
+      </Typography>
       <hr
         style={{
           backgroundColor: "#fff2",
@@ -77,9 +82,9 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           padding: "10px",
         }}
       >
-        <div className={styles.one_time}>
+        {/* <div className={styles.one_time}>
           <p>Available to first time users only</p>
-        </div>
+        </div> */}
         <div className={styles.instructions}>
           <div className={styles.instruc_header}>
             <Typography>Steps</Typography>

@@ -43,7 +43,7 @@ import { Offer } from "@/types/Offer";
 //   },
 // ];
 
-const filters = ["Ongoing", "Complete", "Expired"];
+const filters = ["Submitted", "Completed", "Declined"];
 
 const HistoryList: React.FC<{ offers: Offer[] }> = ({ offers }) => {
   const [selectedFilter, setSelectedFilter] = useState("Complete");
@@ -93,7 +93,8 @@ const HistoryList: React.FC<{ offers: Offer[] }> = ({ offers }) => {
                   ? "var(--primary-color)"
                   : "transparent",
               color: selectedFilter === filter ? "white" : "var(--text-color)",
-              border: "1px solid var(--primary-color)",
+              // border: "1px solid var(--primary-color)",
+              border: "1px solid var(--card-bg)",
             }}
           />
         ))}

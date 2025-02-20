@@ -12,6 +12,7 @@ import BottomNavBar from "@/components/botomNavBar/BottomNavBar";
 import Loader from "@/components/loader/Loader";
 import HistoryMain from "@/components/history/HistoryMain";
 import { getQueryParams } from "@/services/getQueryParams";
+import NoOffersAvailable from "@/components/noOffers/NoOffer";
 
 export default function History() {
   return (
@@ -80,6 +81,8 @@ function HistoryComponent() {
 
     fetchOffers();
   }, [searchParams]);
+
+  if (!getQueryParams()) return <NoOffersAvailable title="No History!" subtitle="It seems like you have not completed any offers. Check offers tab to check available offers." />
 
   if (history.length == 0) return <Loader />;
   // return <Tabs offers={offers} />;

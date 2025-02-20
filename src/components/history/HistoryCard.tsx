@@ -20,7 +20,7 @@ const HistoryCard: React.FC<{ offer: Offer }> = ({ offer }) => {
         "&:hover": { opacity: 0.9 },
         margin: "10px 0",
       }}
-      onClick={() => {}}
+      onClick={() => { }}
     >
       {/* First Row */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>

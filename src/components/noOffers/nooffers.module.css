@@ -1,0 +1,33 @@
+.no_offer_main {
+    height: 80dvh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.img_container {
+    width: 50%;
+    padding: 10px;
+}
+
+.img_container img {
+    width: 100%;
+}
+
+.content {
+    text-align: center;
+    max-width: 65%;
+
+}
+
+.content_head {
+    color: #fff;
+    font-size: 1em;
+}
+
+.content_subtext {
+    color: #888;
+    font-size: 0.7em;
+}

@@ -55,7 +55,7 @@ const OfferCard = ({
             {offerDetails.name}
           </Typography>
         </Box>
-        {/* <Box
+        <Box
           sx={{
             textAlign: "center",
             background: "var(--primary-color)",
@@ -71,7 +71,7 @@ const OfferCard = ({
           <Typography fontWeight="bold">
             🪙 {offerDetails.rewardCoins.toLocaleString()}
           </Typography>
-        </Box> */}
+        </Box>
       </Box>
 
       {/* Second Row */}
