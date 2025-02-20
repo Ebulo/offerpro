@@ -11,12 +11,12 @@ const CoinButton: React.FC<{ mainText: string }> = ({ mainText }) => {
                 display: "flex",
                 alignItems: "right",
                 justifyContent: "right",
-                flexDirection: "column",
-                color: "#fff"
+                flexDirection: "row",
+                color: "#fff",
             }}
         >
-            <div style={{}}>
-                <img src="/img/offercoin.png" alt="Rayole Software Offer Coin" />
+            <div style={{ width: "40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img src="/img/offercoin.png" alt="Rayole Software Offer Coin" style={{ width: "100%" }} />
             </div>
             <div>
 

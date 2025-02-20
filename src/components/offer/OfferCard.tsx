@@ -2,6 +2,7 @@ import { Box, Typography, Chip } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime"; // Clock icon
 // import ChevronRightIcon from "@mui/icons-material/ChevronRight"; // Right arrow icon
 import { Offer } from "@/types/Offer";
+import CoinButton from "../buttons/CoinButton";
 
 const OfferCard = ({
   offerDetails,
@@ -44,7 +45,7 @@ const OfferCard = ({
         />
 
         {/* Offer Details */}
-        <Box sx={{ width: "85%", display: "flex", flexDirection: "column" }}>
+        <Box sx={{ width: "40%", display: "flex", flexDirection: "column" }}>
           <Typography sx={{ color: "gray", fontSize: "12px" }}>
             {offerDetails.offerType.name}
           </Typography>
@@ -55,60 +56,8 @@ const OfferCard = ({
             {offerDetails.name}
           </Typography>
         </Box>
-        <Box
-          sx={{
-            textAlign: "center",
-            background: "var(--primary-color)",
-            padding: "6px 12px",
-            borderRadius: "10px",
-            display: "flex",
-            alignItems: "right",
-            justifyContent: "right",
-            flexDirection: "column",
-          }}
-        >
-          <Typography fontSize="0.7em">Up To</Typography>
-          <Typography fontWeight="bold">
-            🪙 {offerDetails.rewardCoins.toLocaleString()}
-          </Typography>
-        </Box>
+        <CoinButton mainText={offerDetails.rewardCoins.toString()} />
       </Box>
-
-      {/* Second Row */}
-      {/* <Box sx={{ display: "flex", gap: 2 }}>
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            bgcolor: "gray",
-            color: "white",
-            borderRadius: "12px",
-            textTransform: "none",
-            fontSize: "16px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            px: 2,
-          }}
-        >
-          View Details <ChevronRightIcon />
-        </Button>
-
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            bgcolor: "var(--primary-color)",
-            color: "white",
-            borderRadius: "12px",
-            textTransform: "none",
-            fontSize: "16px",
-            fontWeight: "bold",
-          }}
-        >
-          {offerDetails.rewardCoins} Coins
-        </Button>
-      </Box> */}
     </Box>
   );
 };
