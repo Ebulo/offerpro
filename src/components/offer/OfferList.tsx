@@ -7,7 +7,13 @@ import NoOffersAvailable from "../noOffers/NoOffer";
 const OffersList: React.FC<{ offers: Offer[] }> = ({ offers }) => {
   const router = useRouter();
 
-  if (offers.length == 0) return <NoOffersAvailable title="No Offers!" subtitle="It seems like you have completed all the available offers. Please check back later." />;
+  if (offers.length == 0)
+    return (
+      <NoOffersAvailable
+        title="No Offers!"
+        subtitle="It seems like you have completed all the available offers. Please check back later."
+      />
+    );
 
   return (
     <Box
@@ -24,6 +30,7 @@ const OffersList: React.FC<{ offers: Offer[] }> = ({ offers }) => {
         variant="h6"
         style={{
           //   marginBottom: "10px",
+          fontSize: "1.1em",
           textAlign: "left",
           color: "#fff",
           width: "100%",

@@ -16,6 +16,7 @@ import Loader from "@/components/loader/Loader";
 import NoOffersAvailable from "@/components/noOffers/NoOffer";
 import { Send, Upload } from "@mui/icons-material";
 import { getQueryParams } from "@/services/getQueryParams";
+import { toast } from "react-toastify";
 
 // import { fetchOfferById } from "@/services/api"; // Create an API function
 
@@ -37,8 +38,8 @@ const OfferDetail = () => {
 
   const handleSubmit = async () => {
     if (!selectedFile) {
-      console.warn("No file selected!");
-      alert("You must attach an image first");
+      // console.warn("No file selected!");
+      toast.info("You must attach a screenshot of task");
       return;
     }
     try {

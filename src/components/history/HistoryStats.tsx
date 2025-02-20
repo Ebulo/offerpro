@@ -6,11 +6,11 @@ import { Postback } from "@/types/Postback";
 const HistoryStats: React.FC<{ history: Postback[] }> = ({ history }) => {
   // console.log("Offer: ", history);
 
-  const ongoingCount = history.filter(
-    (postback) => postback.status === "ONGOING"
-  ).length;
   const completedCount = history.filter(
     (postback) => postback.status === "COMPLETED"
+  ).length;
+  const submittedCount = history.filter(
+    (postback) => postback.status === "SUBMITTED"
   ).length;
 
   return (
@@ -21,7 +21,7 @@ const HistoryStats: React.FC<{ history: Postback[] }> = ({ history }) => {
         borderRadius: "12px",
         padding: "8px",
         textAlign: "center",
-        marginTop: "10px",
+        marginTop: "20px",
       }}
     >
       <Typography
@@ -51,11 +51,10 @@ const HistoryStats: React.FC<{ history: Postback[] }> = ({ history }) => {
             <Typography
               sx={{ fontSize: "20px", fontWeight: "bold", color: "white" }}
             >
-              {/* 123 */}
-              {ongoingCount}
+              {submittedCount}
             </Typography>
             <Typography sx={{ fontSize: "12px", color: "white" }}>
-              Ongoing Offers.
+              Submitted Offers
             </Typography>
           </Grid>
 
@@ -67,7 +66,7 @@ const HistoryStats: React.FC<{ history: Postback[] }> = ({ history }) => {
               {completedCount}
             </Typography>
             <Typography sx={{ fontSize: "12px", color: "white" }}>
-              Complete Offers
+              Completed Offers
             </Typography>
           </Grid>
         </Grid>

@@ -7,6 +7,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import HistoryIcon from "@mui/icons-material/History";
 import TuneIcon from "@mui/icons-material/Tune";
 import styles from "./bottomnavbar.module.css";
+import { toast } from "react-toastify";
 
 const BottomNavBar: React.FC<{ defaultValue: number }> = ({ defaultValue }) => {
   const [value, setValue] = useState(defaultValue);
@@ -42,7 +43,7 @@ const BottomNavBar: React.FC<{ defaultValue: number }> = ({ defaultValue }) => {
             setValue(newValue);
             if (newValue === 0) router.push("/");
             if (newValue === 1) router.push("/history");
-            // if (newValue === 2) router.push("/filters");
+            if (newValue === 2) toast.success("Coming Soon!");
           }}
           sx={{
             background: "transparent",

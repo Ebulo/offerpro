@@ -10,7 +10,7 @@ const OngoingOfferCard: React.FC<{ offer: Offer }> = ({ offer }) => {
   return (
     <Card
       sx={{
-        width: "95%",
+        width: "92%",
         margin: "auto",
         borderRadius: "12px",
         border: "2px solid var(--primary-color)",
