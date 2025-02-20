@@ -14,51 +14,69 @@ const DetailData = ({ offer }: { offer: Offer }) => {
         sx={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
           gap: 2,
           padding: "10px",
           marginTop: "6px",
         }}
       >
-        <Box
-          component="img"
-          src={offer.offerType.imageUrl ?? offer.offerImage}
-          alt="Offer"
-          sx={{
-            width: "70px",
-            height: "70px",
-            objectFit: "cover",
-            borderRadius: "12px",
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "row",
           }}
-        />
-
-        <Box sx={{ width: "43%", display: "flex", flexDirection: "column" }}>
-          <Typography sx={{ color: "var(--primary-color)", fontSize: "14px" }}>
-            {offer.offerType.name}
-          </Typography>
-          <Typography
-            sx={{ color: "white", fontSize: "15px", fontWeight: "bold" }}
-          >
-            {/* Offer Name */}
-            {offer.name}
-          </Typography>
-          <Chip
-            label={offer.offerType.estTimeToComplete}
+        >
+          <Box
+            component="img"
+            src={offer.offerType.imageUrl ?? offer.offerImage}
+            alt="Offer"
             sx={{
-              bgcolor: "var(--primary-color)",
-              border: "1px solid var(--primary-color)",
-              color: "white",
-              width: "fit-content",
-              fontSize: "10px",
-              height: "unset",
-              // padding: "10px 10xp 10px 10px",
-              paddingTop: "4px",
-              paddingRight: "4px",
-              paddingBottom: "4px",
-              paddingLeft: "4px",
-              borderRadius: "20px",
+              width: "70px",
+              height: "70px",
+              objectFit: "cover",
+              borderRadius: "12px",
             }}
           />
-        </Box>
+
+          <Box
+            sx={{
+              width: "70%",
+              display: "flex",
+              flexDirection: "column",
+              paddingLeft: "10px",
+            }}
+          >
+            <Typography
+              sx={{ color: "var(--primary-color)", fontSize: "14px" }}
+            >
+              {offer.offerType.name}
+            </Typography>
+            <Typography
+              sx={{ color: "white", fontSize: "15px", fontWeight: "bold" }}
+            >
+              {/* Offer Name */}
+              {offer.name}
+            </Typography>
+            <Chip
+              label={offer.offerType.estTimeToComplete}
+              sx={{
+                bgcolor: "var(--primary-color)",
+                border: "1px solid var(--primary-color)",
+                color: "white",
+                width: "fit-content",
+                fontSize: "10px",
+                height: "unset",
+                // padding: "10px 10xp 10px 10px",
+                paddingTop: "4px",
+                paddingRight: "4px",
+                paddingBottom: "4px",
+                paddingLeft: "4px",
+                borderRadius: "20px",
+              }}
+            />
+          </Box>
+        </div>
 
         <CoinButton
           mainText={offer.rewardCoins ? offer.rewardCoins.toString() : "0"}
