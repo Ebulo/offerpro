@@ -35,7 +35,7 @@ export const fetchTasks = async (params: QueryParams) => {
     }),
   });
 
-  console.log("RESPONSE = ", response);
+  // console.log("RESPONSE = ", response);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
@@ -55,7 +55,7 @@ export const fetchTaskById = async (id: number) => {
     },
   });
 
-  console.log("RESPONSE = ", response);
+  // console.log("RESPONSE = ", response);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
@@ -83,7 +83,7 @@ export const fetchInitialisedOffers = async (
     }),
   });
 
-  console.log("RESPONSE = ", response);
+  // console.log("RESPONSE = ", response);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
@@ -113,9 +113,9 @@ export const fetchOngoingOffers = async (params: QueryParams) => {
   }
 
   const data = await response.json();
-  console.log("RESPONSE = ", response, data);
+  // console.log("RESPONSE = ", response, data);
   const postbacks = parsePostbackList(data);
-  console.log("RESPONSE = ", response, data, postbacks);
+  // console.log("RESPONSE = ", response, data, postbacks);
   return fetchOffersFromPostbckList(postbacks);
 };
 
@@ -134,13 +134,15 @@ export const checkPostback = async (params: QueryParams, offerId: number) => {
     }),
   });
 
-  if (!response.ok) {
+  if (response.status == 404) {
+    return false;
+  } else if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
   const data = await response.json();
   const postback = parsePostback(data);
-  console.log("RESPONSE = ", response, data, postback);
+  // console.log("RESPONSE = ", response, data, postback);
   return postback;
 };
 
@@ -161,14 +163,15 @@ export const createPostback = async (params: QueryParams, offerId: number) => {
     }),
   });
 
+  if (response.status == 201)
+    return true
+
   if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
-  const data = await response.json();
-  const postback = parsePostback(data);
-  console.log("RESPONSE = ", response, data, postback);
-  return postback;
+  // const data = await response.json();
+  return false;
 };
 
 export const claimPostback = async (
@@ -200,7 +203,7 @@ export const claimPostback = async (
     }
 
     const data = await response.json();
-    console.log("RESPONSE = ", data);
+    // console.log("RESPONSE = ", data);
     return data;
   } catch (error) {
     console.error("Error submitting claim postback:", error);

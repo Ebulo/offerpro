@@ -4,7 +4,7 @@ import { Box, Chip, Typography } from "@mui/material";
 import GuidelinesSection from "./Guidelines";
 
 const DetailData = ({ offer }: { offer: Offer }) => {
-  console.log("Offerrr: ", offer);
+  // console.log("Offerrr: ", offer);
 
   return (
     <div>
@@ -92,7 +92,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           <div className={styles.instruc_steps}>
             {Object.keys(JSON.parse(offer.offerType.description)).map(
               (index, step) => {
-                console.log(JSON.parse(offer.offerType.description));
+                // console.log(JSON.parse(offer.offerType.description));
                 // if (step != 0)
                 return (
                   <div

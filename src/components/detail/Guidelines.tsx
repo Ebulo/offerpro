@@ -18,7 +18,7 @@ const GuidelinesSection = () => {
         // backgroundColor: "#0d0d16",
         color: "white",
         // padding: "10px 10px 20px 20px",
-        padding: "10px",
+        padding: "10px 10px 30px 10px",
         borderRadius: "10px",
         textAlign: "left",
       }}

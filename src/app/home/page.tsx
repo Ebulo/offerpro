@@ -71,10 +71,6 @@ function OffersComponent() {
     const fetchOffers = async () => {
       try {
         const data = await fetchTasks({
-          // userEmail,
-          // advertisingId,
-          // userId,
-          // appId,
           userEmail: queryParams.userEmail,
           advertisingId: queryParams.advertisingId,
           userId: queryParams.userId,
@@ -94,6 +90,7 @@ function OffersComponent() {
           userId: queryParams.userId,
           appId: queryParams.appId,
         });
+        console.log("Dataa: ", data);
         setOngoingOffers(data);
       } catch (error) {
         console.error("Failed to fetch offers:", error);
@@ -105,7 +102,6 @@ function OffersComponent() {
   }, [searchParams]);
 
   if (!getQueryParams()) return <NoOffersAvailable title="No Offers!" subtitle="It seems like you have completed all the available offers. Please check back later." />
-  if (offers.length == 0 || ongoingOffers.length == 0) return <Loader />;
 
   // return <Tabs offers={offers} />;
   // return <OngoingOffersCarousel offers={offers} />;

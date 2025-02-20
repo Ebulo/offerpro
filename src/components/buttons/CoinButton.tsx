@@ -12,12 +12,19 @@ const CoinButton: React.FC<{ mainText: string }> = ({ mainText }) => {
                 alignItems: "right",
                 justifyContent: "right",
                 flexDirection: "column",
+                color: "#fff"
             }}
         >
-            <Typography fontSize="0.7em">Up To</Typography>
-            <Typography fontWeight="bold">
-                {mainText}
-            </Typography>
+            <div style={{}}>
+                <img src="/img/offercoin.png" alt="Rayole Software Offer Coin" />
+            </div>
+            <div>
+
+                <Typography fontSize="0.7em">Up To</Typography>
+                <Typography fontWeight="bold">
+                    {mainText}
+                </Typography>
+            </div>
         </Box>
     )
 }

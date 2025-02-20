@@ -2,9 +2,12 @@ import { Offer } from "@/types/Offer";
 import { Box, Typography } from "@mui/material";
 import OfferCard from "./OfferCard";
 import { useRouter } from "next/navigation";
+import NoOffersAvailable from "../noOffers/NoOffer";
 
 const OffersList: React.FC<{ offers: Offer[] }> = ({ offers }) => {
   const router = useRouter();
+
+  if (offers.length == 0) return <NoOffersAvailable title="No Offers!" subtitle="It seems like you have completed all the available offers. Please check back later." />;
 
   return (
     <Box
