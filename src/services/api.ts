@@ -8,7 +8,7 @@ import {
   QueryParams,
 } from "@/types/Offer";
 import { ApiBaseUrl } from "./config";
-import { parsePostbackList } from "@/types/Postback";
+import { parsePostback, parsePostbackList } from "@/types/Postback";
 
 const BASE_URL = ApiBaseUrl;
 
@@ -117,4 +117,93 @@ export const fetchOngoingOffers = async (params: QueryParams) => {
   const postbacks = parsePostbackList(data);
   console.log("RESPONSE = ", response, data, postbacks);
   return fetchOffersFromPostbckList(postbacks);
+};
+
+export const checkPostback = async (params: QueryParams, offerId: number) => {
+  const url = `${BASE_URL}/postbacks/retrieve_postback/`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: params.userId,
+      app_id: params.appId,
+      offer_id: offerId,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  const postback = parsePostback(data);
+  console.log("RESPONSE = ", response, data, postback);
+  return postback;
+};
+
+export const createPostback = async (params: QueryParams, offerId: number) => {
+  const url = `${BASE_URL}/postbacks/claim/`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      offer: offerId,
+      user_id: params.userId,
+      app_id: params.appId,
+      user_email: params.userEmail,
+      advertising_id: params.advertisingId,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  const postback = parsePostback(data);
+  console.log("RESPONSE = ", response, data, postback);
+  return postback;
+};
+
+export const claimPostback = async (
+  params: QueryParams,
+  offerId: number,
+  evidenceImage: File
+) => {
+  const url = `${BASE_URL}/postbacks/claim/`;
+  const formData = new FormData();
+
+  // Append fields
+  formData.append("offer", offerId.toString());
+  formData.append("app_id", params.appId.toString());
+  formData.append("user_id", params.userId);
+  formData.append("user_email", params.userEmail);
+  formData.append("advertising_id", params.advertisingId);
+
+  // Append the image file
+  formData.append("evidence_image", evidenceImage);
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to claim postback: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log("RESPONSE = ", data);
+    return data;
+  } catch (error) {
+    console.error("Error submitting claim postback:", error);
+    throw error;
+  }
 };
