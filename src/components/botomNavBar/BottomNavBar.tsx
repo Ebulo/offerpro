@@ -40,10 +40,15 @@ const BottomNavBar: React.FC<{ defaultValue: number }> = ({ defaultValue }) => {
         <BottomNavigation
           value={value}
           onChange={(event, newValue) => {
-            setValue(newValue);
-            if (newValue === 0) router.push("/");
-            if (newValue === 1) router.push("/history");
-            if (newValue === 2) toast.success("Coming Soon!");
+            if (newValue === 2) {
+              toast.success("Coming Soon!");
+              setValue(value); // Revert to previous value
+            } else {
+              setValue(newValue);
+
+              if (newValue === 0) router.push("/");
+              if (newValue === 1) router.push("/history");
+            }
           }}
           sx={{
             background: "transparent",
@@ -99,20 +104,23 @@ const BottomNavBar: React.FC<{ defaultValue: number }> = ({ defaultValue }) => {
             icon={
               <TuneIcon
                 htmlColor={
-                  value === 2 ? "var(--primary-color)" : "rgba(255,255,255,0.4)"
+                  // value === 2 ? "var(--primary-color)" : "rgba(255,255,255,0.4)"
+                  "rgba(255,255,255,0.4)"
                 }
               />
             }
             sx={{
               color:
-                value === 2 ? "var(--primary-color)" : "rgba(255,255,255,0.4)",
+                // value === 2 ? "var(--primary-color)" : "rgba(255,255,255,0.4)",
+                "rgba(255,255,255,0.4)",
               "& .MuiBottomNavigationAction-label": {
                 fontSize: "12px",
                 transition: "color 0.3s",
-                color:
-                  value === 2
-                    ? "var(--primary-color)"
-                    : "rgba(255,255,255,0.4)",
+                // color:
+                //   value === 2
+                //     ? "var(--primary-color)"
+                //     : "rgba(255,255,255,0.4)",
+                color: "rgba(255,255,255,0.4)",
               },
             }}
           />

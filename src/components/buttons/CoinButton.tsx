@@ -13,6 +13,7 @@ const CoinButton: React.FC<{ mainText: string }> = ({ mainText }) => {
         justifyContent: "right",
         flexDirection: "row",
         color: "#fff",
+        gap: "5px",
       }}
     >
       <div
@@ -31,7 +32,9 @@ const CoinButton: React.FC<{ mainText: string }> = ({ mainText }) => {
         />
       </div>
       <div style={{ textAlign: "right" }}>
-        <Typography fontSize="0.7em">Up To</Typography>
+        <Typography fontSize="0.6em" style={{ opacity: "0.7" }}>
+          Up To
+        </Typography>
         <Typography fontWeight="bold">{mainText}</Typography>
       </div>
     </Box>
