@@ -9,7 +9,6 @@ const DetailData = ({ offer }: { offer: Offer }) => {
 
   return (
     <div>
-      {/* <div style={{ height: "10%" }}> */}
       <Box
         sx={{
           display: "flex",
@@ -25,6 +24,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
             display: "flex",
             alignItems: "center",
             flexDirection: "row",
+            width: "65%",
           }}
         >
           <Box
@@ -112,9 +112,6 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           padding: "10px",
         }}
       >
-        {/* <div className={styles.one_time}>
-          <p>Available to first time users only</p>
-        </div> */}
         <div className={styles.instructions}>
           <div className={styles.instruc_header}>
             <Typography>Steps</Typography>
@@ -122,8 +119,6 @@ const DetailData = ({ offer }: { offer: Offer }) => {
           <div className={styles.instruc_steps}>
             {Object.keys(JSON.parse(offer.offerType.description)).map(
               (index, step) => {
-                // console.log(JSON.parse(offer.offerType.description));
-                // if (step != 0)
                 return (
                   <div
                     key={index}
@@ -192,7 +187,6 @@ const DetailData = ({ offer }: { offer: Offer }) => {
 
         <GuidelinesSection />
       </Box>
-      {/* </div> */}
     </div>
   );
 };

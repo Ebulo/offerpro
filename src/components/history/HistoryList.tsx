@@ -29,6 +29,7 @@ const HistoryList: React.FC<{ postbacks: Postback[] }> = ({ postbacks }) => {
   // Recalculate the filtered history when postbacks or selectedFilter changes
   useEffect(() => {
     updateFilteredHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilter, postbacks]);
 
   return (
@@ -73,7 +74,7 @@ const HistoryList: React.FC<{ postbacks: Postback[] }> = ({ postbacks }) => {
             label={filter}
             clickable
             onClick={() => setSelectedFilter(filter)}
-            sx={{
+            style={{
               backgroundColor:
                 selectedFilter === filter
                   ? "var(--primary-color)"
