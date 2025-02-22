@@ -11,7 +11,7 @@ const OfferMain: React.FC<{ offers: Offer[]; ongoingOffers: Offer[] }> = ({
   return (
     <div>
       <OngoingOffersCarousel offers={ongoingOffers} />
-      <OffersList offers={offers} />
+      <OffersList offers={offers} ongoingOffersLength={ongoingOffers.length} />
     </div>
   );
 };

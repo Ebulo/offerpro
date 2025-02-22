@@ -4,7 +4,10 @@ import OfferCard from "./OfferCard";
 import { useRouter } from "next/navigation";
 import NoOffersAvailable from "../noOffers/NoOffer";
 
-const OffersList: React.FC<{ offers: Offer[] }> = ({ offers }) => {
+const OffersList: React.FC<{
+  offers: Offer[];
+  ongoingOffersLength: number;
+}> = ({ offers, ongoingOffersLength }) => {
   const router = useRouter();
 
   if (offers.length == 0)
@@ -26,20 +29,22 @@ const OffersList: React.FC<{ offers: Offer[] }> = ({ offers }) => {
         paddingBottom: "95px",
       }}
     >
-      <Typography
-        variant="h6"
-        style={{
-          //   marginBottom: "10px",
-          fontSize: "1.1em",
-          textAlign: "left",
-          color: "#fff",
-          width: "100%",
-          marginBottom: "10px",
-          paddingLeft: "20px",
-        }}
-      >
-        Available Offers
-      </Typography>
+      {ongoingOffersLength > 0 && (
+        <Typography
+          variant="h6"
+          style={{
+            //   marginBottom: "10px",
+            fontSize: "1.1em",
+            textAlign: "left",
+            color: "#fff",
+            width: "100%",
+            marginBottom: "10px",
+            paddingLeft: "20px",
+          }}
+        >
+          Available Offers
+        </Typography>
+      )}
       {offers.map((offer) => (
         <OfferCard
           key={offer.id}
