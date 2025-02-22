@@ -29,7 +29,7 @@ const DetailData = ({ offer }: { offer: Offer }) => {
         >
           <Box
             component="img"
-            src={offer.offerType.imageUrl ?? offer.offerImage}
+            src={offer.offerImage ?? offer.offerType.imageUrl}
             alt="Offer"
             sx={{
               width: "70px",

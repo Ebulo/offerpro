@@ -44,7 +44,9 @@ const OngoingOfferCard: React.FC<{ offer: Offer }> = ({ offer }) => {
           width: "100%",
           height: "140px",
           borderRadius: "8px",
-          background: `url(${offer.offerImage}) center/cover no-repeat`,
+          background: `url(${
+            offer.offerType.imageUrl ?? offer.offerImage
+          }) center/cover no-repeat`,
         }}
       />
 
@@ -65,7 +67,7 @@ const OngoingOfferCard: React.FC<{ offer: Offer }> = ({ offer }) => {
               width: "45px",
               height: "45px",
               background: `url(${
-                offer.offerType.imageUrl ?? offer.offerImage
+                offer.offerImage ?? offer.offerType.imageUrl
               }) center/cover no-repeat`,
               borderRadius: "8px",
             }}

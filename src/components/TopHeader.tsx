@@ -14,7 +14,7 @@ const TopHeader: React.FC = () => {
         background: "#1F2031",
       }}
     >
-      <div style={{ width: "40%", paddingTop: "20px" }}>
+      <div style={{ width: "30%", paddingTop: "15px" }}>
         {/* eslint-disable-next-line @next/next/no-img-element    */}
         <img
           src={"/img/logo_og.png"}

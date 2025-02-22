@@ -47,7 +47,7 @@ const DetailBanner = ({ offer }: { offer: Offer }) => {
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={offer.offerImage}
+        src={offer.offerType.imageUrl ?? offer.offerImage}
         alt="Offer Banner"
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
       />

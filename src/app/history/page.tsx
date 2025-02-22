@@ -74,7 +74,7 @@ function HistoryComponent() {
     getHistory();
   }, [searchParams]);
 
-  if (!getQueryParams())
+  if (!getQueryParams() || history.length == 0)
     return (
       <NoOffersAvailable
         title="No History!"

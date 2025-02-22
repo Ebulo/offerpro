@@ -39,22 +39,43 @@ const OfferDetail = () => {
   const handleSubmit = async () => {
     if (!selectedFile) {
       // console.warn("No file selected!");
-      toast.info("You must attach a screenshot of task");
+      toast.info("You must attach a screenshot of task", {
+        position: "top-center",
+      });
       return;
     }
     try {
       const queryParams = getQueryParams();
-      await claimPostback(queryParams, parseInt(id as string), selectedFile);
-      router.push("/");
+      const claim = await claimPostback(
+        queryParams,
+        parseInt(id as string),
+        selectedFile
+      );
+      if (!claim) {
+        toast.error("Failed to submit task", {
+          position: "top-center",
+        });
+        return;
+      } else {
+        toast.success("Task submitted successfully", {
+          position: "top-center",
+        });
+        router.push("/");
+      }
     } catch (error) {
       console.error("Failed to submit postback:", error);
     }
   };
 
   const getOfferDetails = async () => {
-    setLoading(true);
+    // setLoading(true);
+    const queryParams = getQueryParams();
+
     try {
-      const data = await fetchTaskById(parseInt(id as string));
+      const data = await fetchTaskById(
+        parseInt(id as string),
+        queryParams.appId
+      );
       setOffer(data);
     } catch (error) {
       console.error("Failed to fetch offer details:", error);
@@ -64,7 +85,7 @@ const OfferDetail = () => {
   };
 
   const checkPostbackDetails = async () => {
-    setLoading(true);
+    // setLoading(true);
     const queryParams = getQueryParams();
 
     try {
@@ -98,26 +119,34 @@ const OfferDetail = () => {
     window.open(offer.offerLink, "_blank");
   };
 
+  const callFromUseEffect = async () => {
+    setLoading(true);
+    await getOfferDetails();
+    await checkPostbackDetails();
+    setLoading(false);
+  };
+
   useEffect(() => {
     if (!id) return;
-    getOfferDetails();
-    checkPostbackDetails();
+    callFromUseEffect();
   }, [id]);
 
   if (loading) return <Loader />;
+
   if (!offer)
-    return (
-      <NoOffersAvailable
-        title={"Offer not found"}
-        subtitle={"This is not a valid offer, please check and confirm"}
-      />
-    );
+    if (!loading)
+      return (
+        <NoOffersAvailable
+          title={"Offer not found"}
+          subtitle={"This is not a valid offer, please check and confirm"}
+        />
+      );
 
   return (
     <div className={styles.main}>
       <div className={styles.detail_top}>
-        <DetailBanner offer={offer} />
-        <DetailData offer={offer} />
+        <DetailBanner offer={offer!} />
+        <DetailData offer={offer!} />
       </div>
       {proceedToOfferBtn()}
     </div>

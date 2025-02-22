@@ -45,8 +45,8 @@ export const fetchTasks = async (params: QueryParams) => {
   return parseOfferList(data);
 };
 
-export const fetchTaskById = async (id: number) => {
-  const url = `${BASE_URL}/tasks/${id}/`;
+export const fetchTaskById = async (id: number, appId: number) => {
+  const url = `${BASE_URL}/tasks/${id}/?app_id=${appId}`;
 
   const response = await fetch(url, {
     method: "GET",
@@ -54,8 +54,6 @@ export const fetchTaskById = async (id: number) => {
       "Content-Type": "application/json",
     },
   });
-
-  // console.log("RESPONSE = ", response);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
@@ -109,8 +107,6 @@ export const fetchHistory = async (params: QueryParams, status: string) => {
       status: status,
     }),
   });
-
-  // console.log("RESPONSE = ", response);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
