@@ -3,6 +3,7 @@ import { Postback } from "./Postback";
 export type Offer = {
   id: number;
   name: string;
+  description?: string;
   offerImage: string;
   enabled: boolean;
   offerLink: string;
@@ -45,6 +46,7 @@ export type ApiOfferType = {
 export type ApiOffer = {
   id: number;
   name: string;
+  description?: string;
   offer_image: string;
   enabled: boolean;
   offer_link: string;
@@ -77,6 +79,7 @@ export const parseOffer = (data: ApiOffer): Offer => {
   return {
     id: data.id,
     name: data.name,
+    description: data.description,
     offerImage: data.offer_image,
     enabled: data.enabled,
     offerLink: data.offer_link,
@@ -98,6 +101,7 @@ export const toJsonOffer = (offer: Offer): ApiOffer => {
   return {
     id: offer.id,
     name: offer.name,
+    description: offer.description,
     offer_image: offer.offerImage,
     enabled: offer.enabled,
     offer_link: offer.offerLink,

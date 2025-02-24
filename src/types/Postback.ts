@@ -16,6 +16,7 @@ export type Postback = {
   declineReason: string | null;
   appId: number;
   offer: Offer;
+  transactionId?: string;
 };
 
 type ApiPostback = {
@@ -34,6 +35,7 @@ type ApiPostback = {
   decline_reason: string | null;
   app_id: number;
   offer: ApiOffer;
+  transaction_id?: string;
 };
 
 type ApiPostbackList = {
@@ -57,6 +59,7 @@ export const parsePostback = (data: ApiPostback): Postback => {
     declineReason: data.decline_reason,
     appId: data.app_id,
     offer: parseOffer(data.offer),
+    transactionId: data.transaction_id,
   };
 };
 
@@ -81,5 +84,6 @@ export const toJsonPostback = (postback: Postback): ApiPostback => {
     decline_reason: postback.declineReason,
     app_id: postback.appId,
     offer: toJsonOffer(postback.offer),
+    transaction_id: postback.transactionId,
   };
 };
