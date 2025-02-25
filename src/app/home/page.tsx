@@ -108,15 +108,15 @@ function OffersComponent() {
     fetchOffers();
   }, [searchParams]);
 
-  if (!getQueryParams())
-    return (
-      <NoOffersAvailable
-        title="No Offers!"
-        subtitle="It seems like you have completed all the available offers. Please check back later."
-      />
-    );
-
   if (loading) return <Loader />;
+
+  // if (!getQueryParams() && offers.length == 0 && ongoingOffers.length == 0)
+  //   return (
+  //     <NoOffersAvailable
+  //       title="No Offers!"
+  //       subtitle="It seems like you have completed all the available offers. Please check back later."
+  //     />
+  //   );
 
   return <OfferMain offers={offers} ongoingOffers={ongoingOffers} />;
 }

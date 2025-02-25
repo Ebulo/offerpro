@@ -6,7 +6,7 @@ import { Postback } from "@/types/Postback";
 import NoOffersAvailable from "../noOffers/NoOffer";
 
 // const filters = ["All", "Ongoing", "Submitted", "Completed", "Declined"];
-const filters = ["Submitted", "Completed", "Declined"];
+const filters = ["Submitted", "Approved", "Completed", "Expired", "Declined"];
 
 const HistoryList: React.FC<{ postbacks: Postback[] }> = ({ postbacks }) => {
   const [selectedFilter, setSelectedFilter] = useState("Submitted");

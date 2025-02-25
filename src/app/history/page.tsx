@@ -35,6 +35,7 @@ export default function History() {
 function HistoryComponent() {
   const searchParams = useSearchParams();
   const [history, setHistory] = useState<Postback[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const updateQueryInLocalStorage = () => {
     const userEmail = searchParams.get("uemail") ?? "";
@@ -63,16 +64,21 @@ function HistoryComponent() {
     if (!queryParams) return;
 
     const getHistory = async () => {
+      setLoading(true);
       try {
         const data = await fetchHistory(queryParams, "");
         setHistory(data);
       } catch (error) {
         console.error("Failed to fetch offers:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     getHistory();
   }, [searchParams]);
+
+  if (loading) return <Loader />;
 
   if (!getQueryParams() || history.length == 0)
     return (
@@ -82,7 +88,6 @@ function HistoryComponent() {
       />
     );
 
-  if (history.length == 0) return <Loader />;
   // return <Tabs offers={offers} />;
   // return <OngoingOffersCarousel offers={offers} />;
   return <HistoryMain history={history} />;
