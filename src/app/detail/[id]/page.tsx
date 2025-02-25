@@ -39,7 +39,7 @@ const OfferDetail = () => {
   const handleSubmit = async () => {
     if (!selectedFile) {
       // console.warn("No file selected!");
-      toast.info("You must attach a screenshot of task", {
+      toast.warning("You must attach a screenshot of task", {
         position: "top-center",
       });
       return;
@@ -52,14 +52,14 @@ const OfferDetail = () => {
         selectedFile
       );
       if (!claim) {
-        toast.error("Failed to submit task", {
-          position: "top-center",
-        });
+        // toast.error("Failed to submit task", {
+        //   position: "top-center",
+        // });
         return;
       } else {
-        toast.success("Task submitted successfully", {
-          position: "top-center",
-        });
+        // toast.success("Task submitted successfully", {
+        //   position: "top-center",
+        // });
         router.push("/");
       }
     } catch (error) {
@@ -104,15 +104,22 @@ const OfferDetail = () => {
   const handleProceedToOffer = async () => {
     if (!offer?.offerLink) {
       console.warn("Offer link is missing!");
+      toast.error("Offer Link is invalid, please check other offers", {
+        position: "top-center",
+      });
       return;
     }
     if (!offerStatus) {
       try {
         const queryParams = getQueryParams();
-        await createPostback(queryParams, parseInt(id as string));
-        setOfferStatus("ONGOING");
+        const pb = await createPostback(queryParams, parseInt(id as string));
+
+        if (pb) setOfferStatus("ONGOING");
       } catch (error) {
-        console.error("Failed to create postback:", error);
+        console.warn("Failed to create postback:", error);
+        // toast.error("Could not validate your credentials", {
+        //   position: "top-center",
+        // });
         return;
       }
     }

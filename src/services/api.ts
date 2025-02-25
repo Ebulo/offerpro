@@ -9,8 +9,12 @@ import {
 } from "@/types/Offer";
 import { ApiBaseUrl } from "./config";
 import { parsePostback, parsePostbackList } from "@/types/Postback";
+import { toast } from "react-toastify";
 
 const BASE_URL = ApiBaseUrl;
+const VALIDATION_ERROR_TEXT =
+  "Could not validate data, relaunch the link from source";
+const UNDEFINED_ERROR = "Something went wrong";
 
 export const fetchTasks = async (params: QueryParams) => {
   const url = `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=false`;
@@ -38,6 +42,7 @@ export const fetchTasks = async (params: QueryParams) => {
   // console.log("RESPONSE = ", response);
 
   if (!response.ok) {
+    toast.error(UNDEFINED_ERROR);
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
@@ -56,6 +61,7 @@ export const fetchTaskById = async (id: number, appId: number) => {
   });
 
   if (!response.ok) {
+    toast.error(UNDEFINED_ERROR);
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
@@ -84,6 +90,7 @@ export const fetchInitialisedOffers = async (
   // console.log("RESPONSE = ", response);
 
   if (!response.ok) {
+    toast.error(VALIDATION_ERROR_TEXT);
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
@@ -109,6 +116,7 @@ export const fetchHistory = async (params: QueryParams, status: string) => {
   });
 
   if (!response.ok) {
+    toast.error(VALIDATION_ERROR_TEXT);
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
@@ -134,13 +142,12 @@ export const fetchOngoingOffers = async (params: QueryParams) => {
   });
 
   if (!response.ok) {
+    toast.error(VALIDATION_ERROR_TEXT);
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
   const data = await response.json();
-  // console.log("RESPONSE = ", response, data);
   const postbacks = parsePostbackList(data);
-  // console.log("RESPONSE = ", response, data, postbacks);
   return fetchOffersFromPostbckList(postbacks);
 };
 
@@ -162,6 +169,7 @@ export const checkPostback = async (params: QueryParams, offerId: number) => {
   if (response.status == 404) {
     return false;
   } else if (!response.ok) {
+    toast.error(VALIDATION_ERROR_TEXT);
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
@@ -191,10 +199,10 @@ export const createPostback = async (params: QueryParams, offerId: number) => {
   if (response.status == 201) return true;
 
   if (!response.ok) {
+    toast.error(VALIDATION_ERROR_TEXT);
     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
   }
 
-  // const data = await response.json();
   return false;
 };
 
@@ -223,6 +231,7 @@ export const claimPostback = async (
     });
 
     if (!response.ok) {
+      toast.error(VALIDATION_ERROR_TEXT);
       throw new Error(`Failed to claim postback: ${response.statusText}`);
     }
 
@@ -230,6 +239,7 @@ export const claimPostback = async (
     // console.log("RESPONSE = ", data);
     return data;
   } catch (error) {
+    toast.error(VALIDATION_ERROR_TEXT);
     console.error("Error submitting claim postback:", error);
     throw error;
   }
