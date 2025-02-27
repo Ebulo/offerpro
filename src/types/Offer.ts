@@ -27,10 +27,10 @@ export type OfferType = {
 };
 
 export type QueryParams = {
-  userEmail: string;
-  advertisingId: string;
-  userId: string;
-  appId: number;
+  // userEmail: string;
+  // advertisingId: string;
+  // userId: string;
+  // appId: number;
   enc: string;
 };
 

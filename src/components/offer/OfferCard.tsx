@@ -48,7 +48,7 @@ const OfferCard = ({
         >
           <Box
             component="img"
-            src={offerDetails.offerImage}
+            src={offerDetails.offerImage ?? "/img/no_image.png"}
             alt="Offer"
             sx={{
               width: "60px",

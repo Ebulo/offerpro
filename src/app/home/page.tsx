@@ -39,11 +39,11 @@ function OffersComponent() {
   const [loading, setLoading] = useState(false);
 
   const updateQueryInLocalStorage = () => {
-    const userEmail = searchParams.get("uemail") ?? "";
-    const advertisingId = searchParams.get("ad_id") ?? "";
-    const userId = searchParams.get("uid") ?? "";
+    // const userEmail = searchParams.get("uemail") ?? "";
+    // const advertisingId = searchParams.get("ad_id") ?? "";
+    // const userId = searchParams.get("uid") ?? "";
     const enc = searchParams.get("enc") ?? "";
-    const appId = Number(searchParams.get("aid")) || null;
+    // const appId = Number(searchParams.get("aid")) || null;
 
     // if (!userEmail || !advertisingId || !userId || !appId) return;
     if (!enc) return;
@@ -56,17 +56,17 @@ function OffersComponent() {
     //   enc: enc
     // };
     const newQuery = {
-      userEmail: userEmail,
-      advertisingId: advertisingId,
-      userId: userId,
-      appId: appId,
+      // userEmail: userEmail,
+      // advertisingId: advertisingId,
+      // userId: userId,
+      // appId: appId,
       enc: enc,
     };
 
     console.log("logginf");
 
     localStorage.setItem("queryParams", JSON.stringify(newQuery));
-    localStorage.setItem("enc", JSON.stringify(newQuery));
+    // localStorage.setItem("enc", JSON.stringify(newQuery));
   };
 
   useEffect(() => {
@@ -84,10 +84,10 @@ function OffersComponent() {
       setLoading(true);
       try {
         const data = await fetchTasks({
-          userEmail: queryParams.userEmail,
-          advertisingId: queryParams.advertisingId,
-          userId: queryParams.userId,
-          appId: queryParams.appId,
+          // userEmail: queryParams.userEmail,
+          // advertisingId: queryParams.advertisingId,
+          // userId: queryParams.userId,
+          // appId: queryParams.appId,
           enc: queryParams.enc,
         });
         setOffers(data);
@@ -102,10 +102,10 @@ function OffersComponent() {
       setLoading(true);
       try {
         const data = await fetchOngoingOffers({
-          userEmail: queryParams.userEmail,
-          advertisingId: queryParams.advertisingId,
-          userId: queryParams.userId,
-          appId: queryParams.appId,
+          // userEmail: queryParams.userEmail,
+          // advertisingId: queryParams.advertisingId,
+          // userId: queryParams.userId,
+          // appId: queryParams.appId,
           enc: queryParams.enc,
         });
         console.log("Dataa: ", data);

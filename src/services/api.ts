@@ -25,10 +25,10 @@ export const fetchTasks = async (params: QueryParams) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      user_email: params.userEmail,
-      advertising_id: params.advertisingId,
-      user_id: params.userId,
-      app_id: params.appId,
+      // user_email: params.userEmail,
+      // advertising_id: params.advertisingId,
+      // user_id: params.userId,
+      // app_id: params.appId,
       enc: params.enc,
     }),
   });
@@ -44,8 +44,9 @@ export const fetchTasks = async (params: QueryParams) => {
   return parseOfferList(data);
 };
 
-export const fetchTaskById = async (id: number, appId: number) => {
-  const url = `${BASE_URL}/tasks/${id}/?app_id=${appId}`;
+export const fetchTaskById = async (id: number, params: QueryParams) => {
+  // const url = `${BASE_URL}/tasks/${id}/?app_id=${appId}`;
+  const url = `${BASE_URL}/tasks/${id}/?enc=${params.enc}`;
 
   const response = await fetch(url, {
     method: "GET",
@@ -75,8 +76,9 @@ export const fetchInitialisedOffers = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      user_id: params.userId,
-      app_id: params.appId,
+      // user_id: params.userId,
+      // app_id: params.appId,
+      enc: params.enc,
       status: status,
     }),
   });
@@ -103,8 +105,9 @@ export const fetchHistory = async (params: QueryParams, status: string) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      user_id: params.userId,
-      app_id: params.appId,
+      // user_id: params.userId,
+      // app_id: params.appId,
+      enc: params.enc,
       status: status,
     }),
   });
@@ -129,8 +132,9 @@ export const fetchOngoingOffers = async (params: QueryParams) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      user_id: params.userId,
-      app_id: params.appId,
+      // user_id: params.userId,
+      // app_id: params.appId,
+      enc: params.enc,
       status: "ONGOING",
     }),
   });
@@ -154,8 +158,9 @@ export const checkPostback = async (params: QueryParams, offerId: number) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      user_id: params.userId,
-      app_id: params.appId,
+      // user_id: params.userId,
+      // app_id: params.appId,
+      enc: params.enc,
       offer_id: offerId,
     }),
   });
@@ -183,10 +188,11 @@ export const createPostback = async (params: QueryParams, offerId: number) => {
     },
     body: JSON.stringify({
       offer: offerId,
-      user_id: params.userId,
-      app_id: params.appId,
-      user_email: params.userEmail,
-      advertising_id: params.advertisingId,
+      enc: params.enc,
+      // user_id: params.userId,
+      // app_id: params.appId,
+      // user_email: params.userEmail,
+      // advertising_id: params.advertisingId,
     }),
   });
 
@@ -210,10 +216,11 @@ export const claimPostback = async (
 
   // Append fields
   formData.append("offer", offerId.toString());
-  formData.append("app_id", params.appId.toString());
-  formData.append("user_id", params.userId);
-  formData.append("user_email", params.userEmail);
-  formData.append("advertising_id", params.advertisingId);
+  // formData.append("app_id", params.appId.toString());
+  // formData.append("user_id", params.userId);
+  // formData.append("user_email", params.userEmail);
+  // formData.append("advertising_id", params.advertisingId);
+  formData.append("enc", params.enc);
 
   // Append the image file
   formData.append("evidence_image", evidenceImage);

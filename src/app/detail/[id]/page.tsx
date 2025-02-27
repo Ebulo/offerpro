@@ -74,7 +74,7 @@ const OfferDetail = () => {
     try {
       const data = await fetchTaskById(
         parseInt(id as string),
-        queryParams.appId
+        queryParams
       );
       setOffer(data);
     } catch (error) {
