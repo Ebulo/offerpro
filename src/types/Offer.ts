@@ -31,6 +31,7 @@ export type QueryParams = {
   advertisingId: string;
   userId: string;
   appId: number;
+  enc: string;
 };
 
 export type ApiOfferType = {

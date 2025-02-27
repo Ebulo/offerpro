@@ -19,13 +19,6 @@ const UNDEFINED_ERROR = "Something went wrong";
 export const fetchTasks = async (params: QueryParams) => {
   const url = `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=false`;
 
-  console.log("Hey iuhcuishiuce", {
-    user_email: params.userEmail,
-    advertising_id: params.advertisingId,
-    user_id: params.userId,
-    app_id: params.appId,
-  });
-
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -36,6 +29,7 @@ export const fetchTasks = async (params: QueryParams) => {
       advertising_id: params.advertisingId,
       user_id: params.userId,
       app_id: params.appId,
+      enc: params.enc,
     }),
   });
 

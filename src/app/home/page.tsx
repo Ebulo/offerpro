@@ -42,20 +42,31 @@ function OffersComponent() {
     const userEmail = searchParams.get("uemail") ?? "";
     const advertisingId = searchParams.get("ad_id") ?? "";
     const userId = searchParams.get("uid") ?? "";
+    const enc = searchParams.get("enc") ?? "";
     const appId = Number(searchParams.get("aid")) || null;
 
-    if (!userEmail || !advertisingId || !userId || !appId) return;
+    // if (!userEmail || !advertisingId || !userId || !appId) return;
+    if (!enc) return;
 
+    // const newQuery = {
+    //   userEmail: userEmail,
+    //   advertisingId: advertisingId,
+    //   userId: userId,
+    //   appId: appId,
+    //   enc: enc
+    // };
     const newQuery = {
       userEmail: userEmail,
       advertisingId: advertisingId,
       userId: userId,
       appId: appId,
+      enc: enc,
     };
 
     console.log("logginf");
 
     localStorage.setItem("queryParams", JSON.stringify(newQuery));
+    localStorage.setItem("enc", JSON.stringify(newQuery));
   };
 
   useEffect(() => {
@@ -77,6 +88,7 @@ function OffersComponent() {
           advertisingId: queryParams.advertisingId,
           userId: queryParams.userId,
           appId: queryParams.appId,
+          enc: queryParams.enc,
         });
         setOffers(data);
       } catch (error) {
@@ -94,6 +106,7 @@ function OffersComponent() {
           advertisingId: queryParams.advertisingId,
           userId: queryParams.userId,
           appId: queryParams.appId,
+          enc: queryParams.enc,
         });
         console.log("Dataa: ", data);
         setOngoingOffers(data);
