@@ -71,23 +71,44 @@ const DetailData = ({ offer }: { offer: Offer }) => {
               {/* Offer Name */}
               {offer.name}
             </Typography>
-            <Chip
-              label={offer.offerType.estTimeToComplete}
-              sx={{
-                bgcolor: "var(--primary-color)",
-                border: "1px solid var(--primary-color)",
-                color: "white",
-                width: "fit-content",
-                fontSize: "10px",
-                height: "unset",
-                // padding: "10px 10xp 10px 10px",
-                paddingTop: "4px",
-                paddingRight: "4px",
-                paddingBottom: "4px",
-                paddingLeft: "4px",
-                borderRadius: "20px",
-              }}
-            />
+            <div>
+              <Chip
+                label={offer.offerType.estTimeToComplete}
+                sx={{
+                  bgcolor: "var(--primary-color)",
+                  border: "1px solid var(--primary-color)",
+                  color: "white",
+                  width: "fit-content",
+                  fontSize: "10px",
+                  height: "unset",
+                  // padding: "10px 10xp 10px 10px",
+                  paddingTop: "4px",
+                  paddingRight: "4px",
+                  paddingBottom: "4px",
+                  paddingLeft: "4px",
+                  borderRadius: "20px",
+                }}
+              />
+              <Chip
+                label={"Beta Release"}
+                color="warning"
+                sx={{
+                  // bgcolor: "yellow",
+                  // border: "1px solid yellow",
+                  color: "white",
+                  width: "fit-content",
+                  fontSize: "10px",
+                  height: "unset",
+                  // padding: "10px 10xp 10px 10px",
+                  margin: "5px",
+                  paddingTop: "4px",
+                  paddingRight: "4px",
+                  paddingBottom: "4px",
+                  paddingLeft: "4px",
+                  borderRadius: "20px",
+                }}
+              />
+            </div>
           </Box>
         </div>
 
