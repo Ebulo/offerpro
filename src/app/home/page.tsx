@@ -4,10 +4,8 @@ import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { fetchOngoingOffers, fetchTasks } from "@/services/api";
 import { Offer } from "@/types/Offer";
-// import Tabs from "@/components/Tabs";
 import styles from "./home.module.css";
 import TopHeader from "@/components/TopHeader";
-// import OngoingOffersCarousel from "@/components/offer/OngoingOffer";
 import OfferMain from "@/components/offer/OfferMain";
 import BottomNavBar from "@/components/botomNavBar/BottomNavBar";
 import Loader from "@/components/loader/Loader";
@@ -37,29 +35,14 @@ function OffersComponent() {
   const [offers, setOffers] = useState<Offer[]>([]);
   const [ongoingOffers, setOngoingOffers] = useState<Offer[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [nextPageUrl, setNextPageUrl] = useState<string | null>(null);
 
   const updateQueryInLocalStorage = () => {
-    // const userEmail = searchParams.get("uemail") ?? "";
-    // const advertisingId = searchParams.get("ad_id") ?? "";
-    // const userId = searchParams.get("uid") ?? "";
     const enc = searchParams.get("enc") ?? "";
-    // const appId = Number(searchParams.get("aid")) || null;
-
-    // if (!userEmail || !advertisingId || !userId || !appId) return;
     if (!enc) return;
 
-    // const newQuery = {
-    //   userEmail: userEmail,
-    //   advertisingId: advertisingId,
-    //   userId: userId,
-    //   appId: appId,
-    //   enc: enc
-    // };
     const newQuery = {
-      // userEmail: userEmail,
-      // advertisingId: advertisingId,
-      // userId: userId,
-      // appId: appId,
       enc: enc,
     };
 
@@ -71,12 +54,6 @@ function OffersComponent() {
 
   useEffect(() => {
     updateQueryInLocalStorage();
-    // const userEmail = searchParams.get("uemail") ?? "";
-    // const advertisingId = searchParams.get("ad_id") ?? "";
-    // const userId = searchParams.get("uid") ?? "";
-    // const appId = Number(searchParams.get("aid")) || 1;
-
-    // if (!userEmail || !advertisingId || !userId) return;
     const queryParams = getQueryParams();
     if (!queryParams) return;
 
@@ -84,13 +61,12 @@ function OffersComponent() {
       setLoading(true);
       try {
         const data = await fetchTasks({
-          // userEmail: queryParams.userEmail,
-          // advertisingId: queryParams.advertisingId,
-          // userId: queryParams.userId,
-          // appId: queryParams.appId,
           enc: queryParams.enc,
         });
-        setOffers(data);
+        console.log("Data of Offers in Main: ", data);
+
+        setOffers(data.results);
+        setNextPageUrl(data.next);
       } catch (error) {
         console.error("Failed to fetch offers:", error);
       } finally {
@@ -102,10 +78,6 @@ function OffersComponent() {
       setLoading(true);
       try {
         const data = await fetchOngoingOffers({
-          // userEmail: queryParams.userEmail,
-          // advertisingId: queryParams.advertisingId,
-          // userId: queryParams.userId,
-          // appId: queryParams.appId,
           enc: queryParams.enc,
         });
         console.log("Dataa: ", data);
@@ -121,6 +93,28 @@ function OffersComponent() {
     fetchOffers();
   }, [searchParams]);
 
+  const loadMoreOffers = async () => {
+    if (!nextPageUrl) return;
+    setLoadingMore(true);
+
+    try {
+      const urlParams = new URLSearchParams(new URL(nextPageUrl).search);
+      const page = urlParams.get("page") ? parseInt(urlParams.get("page")!) : 1;
+
+      const data = await fetchTasks({
+        enc: getQueryParams()?.enc || "",
+        page: page,
+      });
+
+      setOffers((prevOffers) => [...prevOffers, ...data.results]); // Append new offers
+      setNextPageUrl(data.next); // Update next page URL
+    } catch (error) {
+      console.error("Failed to load more offers:", error);
+    } finally {
+      setLoadingMore(false);
+    }
+  };
+
   if (loading) return <Loader />;
 
   if (!getQueryParams() && offers.length == 0 && ongoingOffers.length == 0)
@@ -131,5 +125,95 @@ function OffersComponent() {
       />
     );
 
-  return <OfferMain offers={offers} ongoingOffers={ongoingOffers} />;
+  return (
+    <OfferMain
+      offers={offers}
+      ongoingOffers={ongoingOffers}
+      loadMoreOffers={loadMoreOffers}
+      loadingMore={loadingMore}
+      nextPageUrl={nextPageUrl}
+    />
+  );
 }
+
+// function OffersComponent() {
+//   const searchParams = useSearchParams();
+//   const [offers, setOffers] = useState<Offer[]>([]);
+//   const [ongoingOffers, setOngoingOffers] = useState<Offer[]>([]);
+//   const [loading, setLoading] = useState(false);
+//   const [nextPageUrl, setNextPageUrl] = useState<string | null>(null);
+//   const observerRef = useRef<HTMLDivElement | null>(null);
+
+//   useEffect(() => {
+//     const queryParams = getQueryParams();
+//     if (!queryParams) return;
+
+//     const fetchOffers = async (pageUrl?: string) => {
+//       setLoading(true);
+//       try {
+//         const { offers: newOffers, nextPageUrl } = await fetchTasks(
+//           { enc: queryParams.enc },
+//           pageUrl
+//         );
+//         setOffers((prev) => [...prev, ...newOffers]); // Append new offers
+//         setNextPageUrl(nextPageUrl); // Update nextPage URL
+//       } catch (error) {
+//         console.error("Failed to fetch offers:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     const fetchOngoing = async () => {
+//       setLoading(true);
+//       try {
+//         const data = await fetchOngoingOffers({
+//           enc: queryParams.enc,
+//         });
+//         setOngoingOffers(data);
+//       } catch (error) {
+//         console.error("Failed to fetch offers:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     setOffers([]); // Reset offers on new search
+//     fetchOffers();
+//     fetchOngoing();
+//   }, [searchParams]);
+
+//   // Scroll Observer for Infinite Scrolling
+//   useEffect(() => {
+//     if (!nextPageUrl || loading) return;
+
+//     const observer = new IntersectionObserver(
+//       (entries) => {
+//         if (entries[0].isIntersecting) {
+//           fetchTasks({ enc: getQueryParams()?.enc ?? "" }, nextPageUrl).then(
+//             ({ offers: newOffers, nextPageUrl }) => {
+//               setOffers((prev) => [...prev, ...newOffers]);
+//               setNextPageUrl(nextPageUrl);
+//             }
+//           );
+//         }
+//       },
+//       { threshold: 1.0 }
+//     );
+
+//     if (observerRef.current) observer.observe(observerRef.current);
+
+//     return () => {
+//       if (observerRef.current) observer.unobserve(observerRef.current);
+//     };
+//   }, [nextPageUrl, loading]);
+
+//   return (
+//     <div>
+//       <OfferMain offers={offers} ongoingOffers={ongoingOffers} />
+//       {loading && <Loader />}
+//       {/* Scroll Observer Target */}
+//       <div ref={observerRef} style={{ height: "10px" }} />
+//     </div>
+//   );
+// }

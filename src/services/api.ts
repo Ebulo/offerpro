@@ -3,8 +3,9 @@
 
 import {
   fetchOffersFromPostbckList,
+  parseApiOfferList,
   parseOffer,
-  parseOfferList,
+  // parseOfferList,
   QueryParams,
 } from "@/types/Offer";
 import { ApiBaseUrl } from "./config";
@@ -16,8 +17,33 @@ const VALIDATION_ERROR_TEXT =
   "Could not validate data, relaunch the link from source";
 const UNDEFINED_ERROR = "Something went wrong";
 
-export const fetchTasks = async (params: QueryParams) => {
-  const url = `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=false`;
+// export const fetchTasks = async (params: QueryParams) => {
+//   const url = `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=true`;
+
+//   const response = await fetch(url, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       enc: params.enc,
+//     }),
+//   });
+
+//   if (!response.ok) {
+//     toast.error(UNDEFINED_ERROR);
+//     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+//   }
+
+//   const data = await response.json();
+//   // return parseOfferList(data);
+//   return data;
+// };
+
+export const fetchTasks = async (params: QueryParams & { page?: number }) => {
+  const url = `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=false&page=${
+    params.page || 1
+  }`;
 
   const response = await fetch(url, {
     method: "POST",
@@ -25,15 +51,9 @@ export const fetchTasks = async (params: QueryParams) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      // user_email: params.userEmail,
-      // advertising_id: params.advertisingId,
-      // user_id: params.userId,
-      // app_id: params.appId,
       enc: params.enc,
     }),
   });
-
-  // console.log("RESPONSE = ", response);
 
   if (!response.ok) {
     toast.error(UNDEFINED_ERROR);
@@ -41,12 +61,46 @@ export const fetchTasks = async (params: QueryParams) => {
   }
 
   const data = await response.json();
-  return parseOfferList(data);
+  return parseApiOfferList(data); // Returning full response to access `next`
 };
 
-export const fetchTaskById = async (id: number, params: QueryParams) => {
+// export const fetchTasks = async (params: QueryParams, nextPageUrl?: string) => {
+//   const url =
+//     nextPageUrl ??
+//     `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=false`;
+
+//   const response = await fetch(url, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       enc: params.enc,
+//     }),
+//   });
+
+//   if (!response.ok) {
+//     toast.error(UNDEFINED_ERROR);
+//     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+//   }
+
+//   const data = await response.json();
+//   return {
+//     offers: parseOfferList(data),
+//     nextPageUrl: data.next, // Store the next page URL for pagination
+//   };
+// };
+
+export const fetchTaskById = async (
+  id: number,
+  params: QueryParams,
+  source?: string
+) => {
   // const url = `${BASE_URL}/tasks/${id}/?app_id=${appId}`;
-  const url = `${BASE_URL}/tasks/${id}/?enc=${params.enc}`;
+  const url =
+    source == "offer18"
+      ? `${BASE_URL}/tasks/offer18-detail/${id}/`
+      : `${BASE_URL}/tasks/${id}/?enc=${params.enc}`;
 
   const response = await fetch(url, {
     method: "GET",

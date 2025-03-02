@@ -14,6 +14,7 @@ export type Offer = {
   cpc: string;
   rewardCoins: number;
   status?: string;
+  source?: string;
 };
 
 export type OfferType = {
@@ -58,10 +59,14 @@ export type ApiOffer = {
   cpc: string;
   reward_coins: number;
   status?: string;
+  source?: string;
 };
 
 type ApiOfferList = {
+  count?: number;
   results: ApiOffer[];
+  next?: string;
+  previous?: string;
 };
 
 export const parseOfferType = (data: ApiOfferType): OfferType => {
@@ -91,11 +96,43 @@ export const parseOffer = (data: ApiOffer): Offer => {
     cpc: data.cpc,
     rewardCoins: data.reward_coins,
     status: data.status ?? "Active", // Defaulting status if not present
+    source: data.source ?? "offerpro",
   };
 };
 
-export const parseOfferList = (data: ApiOfferList): Offer[] => {
-  return data.results.map((offer) => parseOffer(offer));
+// export const parseOfferList = (data: ApiOfferList): Offer[] => {
+//   return data.results.map((offer) => parseOffer(offer));
+// };
+export const parseOfferList = (data: ApiOfferList | ApiOffer[]): Offer[] => {
+  if ("results" in data) {
+    return data.results.map((offer) => parseOffer(offer));
+  }
+  return data.map((offer) => parseOffer(offer));
+};
+
+export const parseApiOfferList = (
+  data: ApiOfferList | ApiOffer[]
+): {
+  count: number;
+  results: Offer[];
+  next: string | null;
+  previous: string | null;
+} => {
+  if (Array.isArray(data)) {
+    return {
+      count: data.length,
+      results: data.map((offer) => parseOffer(offer)), // Convert to Offer[]
+      next: null,
+      previous: null,
+    };
+  }
+
+  return {
+    count: data.count ?? 0,
+    results: data.results.map((offer) => parseOffer(offer)), // Convert to Offer[]
+    next: data.next ?? null,
+    previous: data.previous ?? null,
+  };
 };
 
 export const toJsonOffer = (offer: Offer): ApiOffer => {
@@ -121,6 +158,7 @@ export const toJsonOffer = (offer: Offer): ApiOffer => {
     cpc: offer.cpc,
     reward_coins: offer.rewardCoins,
     status: offer.status,
+    source: offer.source,
   };
 };
 

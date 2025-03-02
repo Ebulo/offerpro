@@ -4,12 +4,12 @@ import { useParams, useRouter } from "next/navigation";
 import DetailBanner from "@/components/detail/DetailBanner";
 import DetailData from "@/components/detail/DetailData";
 import { Button } from "@mui/material";
-import styles from "./detail.module.css";
+import styles from "../detail.module.css";
 import { Offer } from "@/types/Offer";
 import {
   checkPostback,
   claimPostback,
-  createPostback,
+  // createPostback,
   fetchTaskById,
 } from "@/services/api";
 import Loader from "@/components/loader/Loader";
@@ -21,7 +21,7 @@ import { toast } from "react-toastify";
 // import { fetchOfferById } from "@/services/api"; // Create an API function
 
 const OfferDetail = () => {
-  const { id } = useParams();
+  const { id, source } = useParams();
   const router = useRouter();
   const [offer, setOffer] = useState<Offer | null>(null);
 
@@ -52,14 +52,8 @@ const OfferDetail = () => {
         selectedFile
       );
       if (!claim) {
-        // toast.error("Failed to submit task", {
-        //   position: "top-center",
-        // });
         return;
       } else {
-        // toast.success("Task submitted successfully", {
-        //   position: "top-center",
-        // });
         router.push("/");
       }
     } catch (error) {
@@ -72,7 +66,11 @@ const OfferDetail = () => {
     const queryParams = getQueryParams();
 
     try {
-      const data = await fetchTaskById(parseInt(id as string), queryParams);
+      const data = await fetchTaskById(
+        parseInt(id as string),
+        queryParams,
+        (source as string) ?? ""
+      );
       setOffer(data);
     } catch (error) {
       console.error("Failed to fetch offer details:", error);
@@ -99,6 +97,7 @@ const OfferDetail = () => {
   };
 
   const handleProceedToOffer = async () => {
+    console.log("Offer: ", offer);
     if (!offer?.offerLink) {
       console.warn("Offer link is missing!");
       toast.error("Offer Link is invalid, please check other offers", {
@@ -106,20 +105,17 @@ const OfferDetail = () => {
       });
       return;
     }
-    if (!offerStatus) {
-      try {
-        const queryParams = getQueryParams();
-        const pb = await createPostback(queryParams, parseInt(id as string));
+    // if (!offerStatus) {
+    //   try {
+    //     const queryParams = getQueryParams();
+    //     const pb = await createPostback(queryParams, parseInt(id as string));
 
-        if (pb) setOfferStatus("ONGOING");
-      } catch (error) {
-        console.warn("Failed to create postback:", error);
-        // toast.error("Could not validate your credentials", {
-        //   position: "top-center",
-        // });
-        return;
-      }
-    }
+    //     if (pb) setOfferStatus("ONGOING");
+    //   } catch (error) {
+    //     console.warn("Failed to create postback:", error);
+    //     return;
+    //   }
+    // }
     window.open(offer.offerLink, "_blank");
   };
 
