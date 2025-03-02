@@ -4,7 +4,13 @@ import { Box, Chip, Typography } from "@mui/material";
 import GuidelinesSection from "./Guidelines";
 import CoinButton from "../buttons/CoinButton";
 
-const DetailData = ({ offer }: { offer: Offer }) => {
+const DetailData = ({
+  offer,
+  extras,
+}: {
+  offer: Offer;
+  extras?: { beta: boolean };
+}) => {
   console.log("Offerrr: ", offer);
 
   function checkJSON(text: unknown) {
@@ -89,25 +95,27 @@ const DetailData = ({ offer }: { offer: Offer }) => {
                   borderRadius: "20px",
                 }}
               />
-              <Chip
-                label={"Beta Release"}
-                color="warning"
-                sx={{
-                  // bgcolor: "yellow",
-                  // border: "1px solid yellow",
-                  color: "white",
-                  width: "fit-content",
-                  fontSize: "10px",
-                  height: "unset",
-                  // padding: "10px 10xp 10px 10px",
-                  margin: "5px",
-                  paddingTop: "4px",
-                  paddingRight: "4px",
-                  paddingBottom: "4px",
-                  paddingLeft: "4px",
-                  borderRadius: "20px",
-                }}
-              />
+              {extras?.beta && (
+                <Chip
+                  label={"Beta Release"}
+                  color="warning"
+                  sx={{
+                    // bgcolor: "yellow",
+                    // border: "1px solid yellow",
+                    color: "white",
+                    width: "fit-content",
+                    fontSize: "10px",
+                    height: "unset",
+                    // padding: "10px 10xp 10px 10px",
+                    margin: "5px",
+                    paddingTop: "4px",
+                    paddingRight: "4px",
+                    paddingBottom: "4px",
+                    paddingLeft: "4px",
+                    borderRadius: "20px",
+                  }}
+                />
+              )}
             </div>
           </Box>
         </div>

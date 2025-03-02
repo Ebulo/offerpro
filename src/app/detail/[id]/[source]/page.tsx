@@ -146,7 +146,7 @@ const OfferDetail = () => {
     <div className={styles.main}>
       <div className={styles.detail_top}>
         <DetailBanner offer={offer!} />
-        <DetailData offer={offer!} />
+        <DetailData offer={offer!} extras={{ beta: true }} />
       </div>
       {proceedToOfferBtn()}
     </div>
