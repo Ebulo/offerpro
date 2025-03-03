@@ -41,9 +41,8 @@ const UNDEFINED_ERROR = "Something went wrong";
 // };
 
 export const fetchTasks = async (params: QueryParams & { page?: number }) => {
-  const url = `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=false&page=${
-    params.page || 1
-  }`;
+  const url = `${BASE_URL}/tasks/list_tasks/?ordering=cpc&no_pagination=false&page=${params.page || 1
+    }`;
 
   const response = await fetch(url, {
     method: "POST",
@@ -232,7 +231,7 @@ export const checkPostback = async (params: QueryParams, offerId: number) => {
   return postback;
 };
 
-export const createPostback = async (params: QueryParams, offerId: number) => {
+export const createPostback = async (params: QueryParams, offerId: number, offer18Details?: { is_offer18: boolean, offer18_cpc: string }) => {
   const url = `${BASE_URL}/postbacks/claim/`;
 
   const response = await fetch(url, {
@@ -240,13 +239,14 @@ export const createPostback = async (params: QueryParams, offerId: number) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
+    body: !offer18Details ? JSON.stringify({
       offer: offerId,
       enc: params.enc,
-      // user_id: params.userId,
-      // app_id: params.appId,
-      // user_email: params.userEmail,
-      // advertising_id: params.advertisingId,
+    }) : JSON.stringify({
+      offer: offerId,
+      enc: params.enc,
+      is_offer18: offer18Details.is_offer18,
+      offer18_cpc: offer18Details.offer18_cpc,
     }),
   });
 

@@ -78,7 +78,7 @@ const DetailData = ({
               {offer.name}
             </Typography>
             <div>
-              <Chip
+              {offer.offerType.estTimeToComplete && <Chip
                 label={offer.offerType.estTimeToComplete}
                 sx={{
                   bgcolor: "var(--primary-color)",
@@ -94,7 +94,7 @@ const DetailData = ({
                   paddingLeft: "4px",
                   borderRadius: "20px",
                 }}
-              />
+              />}
               {extras?.beta && (
                 <Chip
                   label={"Beta Release"}

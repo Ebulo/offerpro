@@ -9,12 +9,13 @@ import { Offer } from "@/types/Offer";
 import {
   checkPostback,
   claimPostback,
+  createPostback,
   // createPostback,
   fetchTaskById,
 } from "@/services/api";
 import Loader from "@/components/loader/Loader";
 import NoOffersAvailable from "@/components/noOffers/NoOffer";
-import { Send, Upload } from "@mui/icons-material";
+// import { Send, Upload } from "@mui/icons-material";
 import { getQueryParams } from "@/services/getQueryParams";
 import { toast } from "react-toastify";
 
@@ -105,17 +106,24 @@ const OfferDetail = () => {
       });
       return;
     }
-    // if (!offerStatus) {
-    //   try {
-    //     const queryParams = getQueryParams();
-    //     const pb = await createPostback(queryParams, parseInt(id as string));
+    if (!offerStatus) {
+      try {
+        const queryParams = getQueryParams();
+        console.log(offer.cpc);
 
-    //     if (pb) setOfferStatus("ONGOING");
-    //   } catch (error) {
-    //     console.warn("Failed to create postback:", error);
-    //     return;
-    //   }
-    // }
+        const pb = await createPostback(queryParams, parseInt(id as string), { is_offer18: true, offer18_cpc: offer.cpc });
+        // if (pb) setOfferStatus("ONGOING");
+        toast.success("Offer Started Successfully", {
+          position: "top-center",
+        });
+      } catch (error) {
+        toast.error("Failed to start the offer", {
+          position: "top-center",
+        });
+        console.warn("Failed to create postback:", error);
+        return;
+      }
+    }
     window.open(offer.offerLink, "_blank");
   };
 
@@ -189,7 +197,7 @@ const OfferDetail = () => {
           onChange={handleFileUpload}
           className={styles.hidden_input}
         />
-        <Button
+        {/* <Button
           startIcon={<Upload />}
           style={{
             width: "85%",
@@ -225,7 +233,7 @@ const OfferDetail = () => {
           onClick={handleSubmit}
         >
           Submit
-        </Button>
+        </Button> */}
       </div>
     );
   }
