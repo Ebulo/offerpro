@@ -20,7 +20,13 @@ const OngoingOfferCard: React.FC<{ offer: Offer }> = ({ offer }) => {
         position: "relative",
         overflow: "hidden",
       }}
-      onClick={() => router.push(`/detail/${offer.id}`)}
+      onClick={() =>
+        router.push(
+          offer.source == "offerpro"
+            ? `/detail/${offer.id}`
+            : `/detail/${offer.id}/${offer.source}`
+        )
+      }
     >
       {/* Ongoing Offers Tag */}
       <Box
